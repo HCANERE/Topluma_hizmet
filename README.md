@@ -2,6 +2,8 @@
 
 Türkçe, mobil uyumlu ve tamamen statik bir dijital dolandırıcılık farkındalık oyunu. Üyelik, veritabanı, kişisel veri toplama ve sunucu kodu yoktur.
 
+Bu oyun, dersin **Güvenli Dijital Toplum: Toplum Geneli Siber Güvenlik Farkındalık Projesi** için hazırlanan etkileşimli eğitim aracıdır. Dersin diğer çıktıları ve ölçüm hedefleri için [ders belgelerine uyum planına](docs/ders-uyum-plani.md) bakın. Oyundaki puan, dersin ön test/son test etki ölçümü değildir.
+
 Canlı site: https://tiklamadan-once-dusun.mustafakarademir1011.chatgpt.site
 
 ## Çalıştırma
