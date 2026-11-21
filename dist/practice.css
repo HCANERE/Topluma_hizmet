@@ -23,7 +23,7 @@
 
 .practice-entry-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -101,6 +101,82 @@
 
 .practice-block:target {
   border-color: #8b72d5;
+}
+
+.inspector-block {
+  max-width: 940px;
+}
+.inspector-notice,
+.inspector-result {
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
+  background: #f0ebfc;
+  border: 1px solid #d8cef4;
+}
+.inspector-notice {
+  margin-bottom: 1.5rem;
+}
+.inspector-block label {
+  display: block;
+  margin-bottom: .5rem;
+  font-weight: 750;
+}
+.inspector-controls {
+  display: flex;
+  gap: .75rem;
+}
+.inspector-controls input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: .85rem 1rem;
+  font: inherit;
+  border: 2px solid #a997d7;
+  border-radius: 12px;
+}
+.inspector-controls input:focus-visible,
+.inspector-upload input:focus-visible {
+  outline: 4px solid #b66412;
+  outline-offset: 3px;
+}
+.inspector-controls button {
+  flex: 0 0 auto;
+}
+#inspector-help,
+#inspector-qr-help {
+  color: var(--muted);
+  margin-top: .6rem;
+}
+.inspector-upload {
+  margin: 1.5rem 0;
+}
+.inspector-upload input {
+  display: block;
+  max-width: 100%;
+  font: inherit;
+}
+#inspector-qr-status:not(:empty) {
+  padding: .65rem 0;
+  font-weight: 700;
+}
+.inspector-result h3 {
+  margin-bottom: .6rem;
+}
+.inspector-host-label {
+  margin: 1rem 0 .25rem;
+  font-weight: 700;
+}
+.inspector-host {
+  padding: .7rem .9rem;
+  background: white;
+  border-radius: 9px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+.inspector-result li {
+  margin-bottom: .5rem;
+}
+.inspector-next {
+  margin-bottom: 0;
 }
 
 .practice-intro {
@@ -351,6 +427,9 @@
 }
 
 @media (max-width: 760px) {
+  .practice-entry-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .tactic-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -365,6 +444,12 @@
 
   .practice-actions > button {
     flex: 1 1 11rem;
+  }
+  .inspector-controls {
+    flex-direction: column;
+  }
+  .inspector-controls button {
+    width: 100%;
   }
 }
 

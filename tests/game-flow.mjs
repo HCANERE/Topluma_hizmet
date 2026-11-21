@@ -62,12 +62,13 @@ function launch(stored = {}, blocked = false, initialHash = '') {
     const node = new Node('p'); node.dataset.progress = starter.dataset.category; return node;
   });
   const track = new Node();
+  const inspectorHostLabel = new Node('p');
   const document = {
     body: new Node('body'), documentElement: new Node('html'),
     createElement: (tag) => new Node(tag),
     getElementById: (id) => ids.get(id) ?? null,
     querySelector: (selector) => {
-      const node = selector === '.progress-track' ? track : ids.get(selector.slice(1));
+      const node = selector === '.progress-track' ? track : selector === '.inspector-host-label' ? inspectorHostLabel : ids.get(selector.slice(1));
       assert.ok(node, `Missing DOM target: ${selector}`); return node;
     },
     querySelectorAll: (selector) => {
@@ -93,7 +94,7 @@ function launch(stored = {}, blocked = false, initialHash = '') {
       }
     }
   };
-  const context = {document, window, localStorage: {
+  const context = {document, window, URL, localStorage: {
     getItem: (key) => { if (blocked) throw Error('Disabled'); return stored[key] ?? null; },
     setItem: (key, value) => { if (blocked) throw Error('Disabled'); stored[key] = value; },
     removeItem: (key) => { if (blocked) throw Error('Disabled'); delete stored[key]; }
@@ -235,4 +236,23 @@ assert.equal(ids.get('practice-screen').hidden, true);
 assert.equal(ids.get('home-screen').hidden, false);
 assert.equal(ids.get('category-title').focused, true);
 assert.equal(launch({}, false, '#taktik-kod').ids.get('taktik-kod').open, true);
-console.log('Practice flows passed: section links, tactic links, three scenarios with two variants each, and recovery exercises.');
+practiceWindow.location.hash = '#baglanti-incele';
+assert.deepEqual(views.filter((view) => !view.hidden).map((view) => view.id), ['baglanti-incele']);
+const inspect = practiceWindow.TOD_URL_INSPECTOR.analyzeAddress;
+const disguised = inspect('https://banka.example.com@ornek.example.com/hesap?token=secret');
+assert.equal(disguised.host, 'ornek.example.com');
+assert.ok(disguised.findings.some((item) => item.includes('@ işareti')));
+assert.ok(!JSON.stringify(disguised).includes('secret'));
+assert.ok(inspect('https://example.com').summary.includes('güvenli olduğunu belirlemez'));
+assert.ok(inspect('http://example.com').findings.some((item) => item.includes('şifreli değil')));
+assert.equal(inspect('example.com:8080/deneme').host, 'example.com:8080');
+assert.ok(inspect('javascript:alert(1)').error);
+assert.ok(inspect('https://xn--ornek-4ya.example.com').findings.some((item) => item.includes('xn--')));
+ids.get('inspector-qr').files = [{ type: 'image/png', size: 1024 }];
+await ids.get('inspector-qr').handlers.change();
+assert.ok(ids.get('inspector-qr-status').textContent.includes('tarayıcı QR görselini okuyamıyor'));
+practiceWindow.BarcodeDetector = class { async detect() { return [{ rawValue: 'https://ornek.example.com' }]; } };
+await ids.get('inspector-qr').handlers.change();
+assert.equal(ids.get('inspector-host').textContent, 'ornek.example.com');
+assert.ok(ids.get('inspector-qr-status').textContent.includes('bağlantı açılmadı'));
+console.log('Practice flows passed: section links, tactic links, scenarios, recovery exercises, and explainable address inspection.');

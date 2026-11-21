@@ -13,6 +13,7 @@
   <script src="app.js" defer></script>
   <script src="lab-scenarios.js" defer></script>
   <script src="practice.js" defer></script>
+  <script src="url-inspector.js" defer></script>
 </head>
 <body>
   <a id="skip-link" class="skip-link" href="#main">İçeriğe geç</a>
@@ -46,6 +47,10 @@
                 <strong>Şimdi Ne Yapacağım?</strong>
                 <span>Bir bağlantı açtıktan veya giriş kodu paylaştıktan sonraki adımları dene.</span>
               </a>
+              <a class="practice-entry" href="#baglanti-incele">
+                <strong>Bağlantı ve QR incele</strong>
+                <span>Adresin nereye yöneldiğini gör; dikkat gerektiren işaretleri öğren.</span>
+              </a>
             </div>
           </div>
         </section>
@@ -64,6 +69,7 @@
           <a href="#laboratuvar" data-practice-link>Tuzak Laboratuvarı</a>
           <a href="#taktik-rehberi" data-practice-link>Taktik Rehberi</a>
           <a href="#zarar-kontrolu" data-practice-link>Şimdi Ne Yapacağım?</a>
+          <a href="#baglanti-incele" data-practice-link>Bağlantı ve QR incele</a>
         </nav>
 
         <section class="practice-block" id="laboratuvar" aria-labelledby="lab-title" data-practice-view hidden>
@@ -164,6 +170,21 @@
             </div>
           </div>
           <p class="practice-sources"><a href="https://support.google.com/accounts/answer/6294825?hl=tr" target="_blank" rel="noopener noreferrer">Google Hesap Yardımı · Ele geçirilen hesabı güvene alma</a></p>
+        </section>
+        <section class="practice-block inspector-block" id="baglanti-incele" aria-labelledby="inspector-title" data-practice-view hidden>
+          <div class="practice-intro">
+            <h2 id="inspector-title" tabindex="-1">Bağlantı ve QR incele</h2>
+            <p>Bir web adresini yapıştır veya QR görseli seç. Gerçek adresi ve dikkat edilecek işaretleri birlikte inceleyelim.</p>
+          </div>
+          <div class="inspector-notice"><strong>Bu bir virüs taraması değildir.</strong> Bir adresin güvenli olduğunu kesin olarak söyleyemeyiz. Araç, bağlantıyı açmaz ve bir güvenlik veritabanında sorgulamaz.</div>
+          <form id="inspector-form" novalidate>
+            <label for="inspector-input">İncelemek istediğin web adresi</label>
+            <div class="inspector-controls"><input id="inspector-input" name="address" type="text" inputmode="url" autocomplete="off" spellcheck="false" maxlength="2048" placeholder="https://ornek.example.com" aria-describedby="inspector-help"><button type="submit" class="start-button">Adresi İncele</button></div>
+            <p id="inspector-help">Kişisel bilgi veya giriş kodu içeren adresleri girmeyin. Girilen adres cihazınızda incelenir; kaydedilmez ve sunucuya gönderilmez.</p>
+          </form>
+          <div class="inspector-upload"><label for="inspector-qr">QR kod görseli seç (isteğe bağlı)</label><input id="inspector-qr" type="file" accept="image/png,image/jpeg,image/webp" aria-describedby="inspector-qr-help"><p id="inspector-qr-help">QR okuma tarayıcınıza bağlıdır. Çalışmazsa QR kodun gösterdiği adresi yukarıya elle yazabilirsiniz.</p><p id="inspector-qr-status" role="status" aria-live="polite"></p></div>
+          <section id="inspector-result" class="inspector-result" aria-labelledby="inspector-result-title" hidden><h3 id="inspector-result-title" tabindex="-1">Adres incelemesi</h3><p id="inspector-summary"></p><p class="inspector-host-label">Bağlantının gittiği adres</p><p id="inspector-host" class="inspector-host"></p><ul id="inspector-findings"></ul><p class="inspector-next"><strong>Güvenli adım:</strong> Kuruma ulaşmak için mesajdaki adresi veya numarayı kullanmadan, bildiğin resmî siteyi ya da uygulamayı kendin aç ve işlemi oradan doğrula.</p></section>
+          <p class="practice-sources"><a href="https://consumer.ftc.gov/articles/online-shopping" target="_blank" rel="noopener noreferrer" lang="en">FTC · HTTPS ve alışveriş sitesi güvenilirliği</a> <a href="https://www.cisa.gov/sites/default/files/2024-09/Secure-Our-World-4-Easy-Ways-Stay-Safe-Online-Tip-Sheet.pdf" target="_blank" rel="noopener noreferrer" lang="en">CISA · Oltalama mesajlarını tanıma</a></p>
         </section>
       </div>
     </main>
