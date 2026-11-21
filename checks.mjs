@@ -10,7 +10,7 @@ assert.deepEqual(Object.keys(bank), ['youth', 'parents', 'seniors']);
 const ids = new Set();
 const kinds = new Set(['sms', 'email', 'social', 'call']);
 for (const [category, group] of Object.entries(bank)) {
-  assert.equal(group.questions.length, 5, `${category}: five questions`);
+  assert.ok(group.questions.length >= 5, `${category}: at least five questions`);
   for (const [index, question] of group.questions.entries()) {
     assert.ok(!ids.has(question.id), `${question.id}: unique id`);
     ids.add(question.id);
@@ -27,8 +27,8 @@ for (const [category, group] of Object.entries(bank)) {
     for (const match of allText.matchAll(/\b[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b/g)) {
       assert.ok(match[0].endsWith('.example.com') || match[0] === 'example.com', `${question.id}: example domain only`);
     }
-    assert.ok(index < 5);
+    assert.ok(index < group.questions.length);
   }
 }
-assert.equal(ids.size, 15);
-console.log('15 scenarios, 3 categories, choices, explanations, and example domains verified.');
+assert.equal(ids.size, 18);
+console.log('18 scenarios, 3 categories, choices, explanations, and example domains verified.');

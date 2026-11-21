@@ -1,11 +1,24 @@
-/* Senaryolar burada tutulur. Her kategori tam olarak beş soru içerir. */
+/* Senaryolar burada tutulur. Her tur, ilgili kategoriden rastgele beş soru seçer. */
 window.TOD_DATA = {
   youth: {
     title: 'Gençler',
     description: 'Burs, oyun, sosyal medya ve iş fırsatlarında güvenli kararlar.',
     questions: [
       {
-        id: 'y-burs', topic: 'Sahte burs mesajı', kind: 'sms', from: 'Kampüs Burs Birimi',
+        id: 'y-qr', topic: 'Kafedeki QR kod', kind: 'social', from: 'Masadaki menü kartının açıklaması',
+        message: 'Menüyü görmek için masadaki QR kodu okuttun. Açılan menu.example.com sayfası, menüyü açmadan önce kart numaranı ve kartının arkasındaki güvenlik kodunu istiyor. QR etiketi başka bir etiketin üzerine yapıştırılmış görünüyor.',
+        choices: [
+          'Masanın üzerindeki kod olduğu için kart bilgilerimi girerim.',
+          'Bilgi girmeden sayfayı kapatır, menüyü görevliye sorarım.',
+          'Sayfada kilit işareti varsa kart bilgilerimi paylaşırım.'
+        ], correct: 1,
+        explanation: 'QR kodun masada olması veya sayfanın kilit işareti göstermesi güvenilirliği kanıtlamaz. Menü için kart bilgisi istenmesi ve üst üste yapıştırılan etiket, durup işletmeden doğrulamak için nedenlerdir.',
+        clues: ['Menü görüntülemek için kart bilgisi istenmesi', 'Başka bir etiketin üzerine yapıştırılmış QR etiketi'],
+        tip: 'QR kodla açılan sayfanın ne istediğine bak; beklenmedik ödeme veya giriş isteğini işletmeden doğrula.',
+        review: 'QR kodla açılan sayfalarda beklenmedik bilgi taleplerini kontrol etme'
+      },
+      {
+        id: 'y-burs', topic: 'Burs başvurusu hakkında bir mesaj', kind: 'sms', from: 'Kampüs Burs Birimi',
         message: 'Tebrikler! Burs aday listesine seçildin. Dosyanı bugün tamamlamak için 290 TL işlem ücreti yatırman gerekiyor.',
         choices: [
           'Süre dolmadan işlem ücretini gönderip dekontu saklarım.',
@@ -18,7 +31,7 @@ window.TOD_DATA = {
         review: 'Burs ve işlem ücreti tekliflerini bağımsız doğrulama'
       },
       {
-        id: 'y-oyun', topic: 'Oyun hesabı tuzağı', kind: 'social', from: 'Arena Oyun Hediyeleri',
+        id: 'y-oyun', topic: 'Oyun hesabına bir hediye', kind: 'social', from: 'Arena Oyun Hediyeleri',
         message: 'Hesabına ücretsiz 5.000 oyun parası yükleyebiliriz. Kullanıcı adını ve parolanı bize özel mesajla gönder; ödül hemen tanımlansın.',
         choices: [
           'Parolamı paylaşmam; duyuruyu oyunun kendi uygulamasında ararım.',
@@ -44,7 +57,7 @@ window.TOD_DATA = {
         review: 'Tek kullanımlık doğrulama kodunu paylaşmama'
       },
       {
-        id: 'y-is', topic: 'Ön ödemeli iş ilanı', kind: 'email', from: 'İlk Adım İş Ekibi', subject: 'Evden çalışma başvurunuz',
+        id: 'y-is', topic: 'Evden çalışma teklifi', kind: 'email', from: 'İlk Adım İş Ekibi', subject: 'Evden çalışma başvurunuz',
         message: 'Haftada birkaç saat çalışarak yüksek gelir elde edebilirsiniz. Başvurunuzu açmak için 450 TL kayıt bedelini bugün yatırın.',
         choices: [
           'İlanı kaçırmamak için kayıt bedelini hemen yatırırım.',
@@ -76,6 +89,19 @@ window.TOD_DATA = {
     description: 'Okul, alışveriş, aile ve kargo mesajlarında dikkat edilmesi gerekenler.',
     questions: [
       {
+        id: 'p-teslimat', topic: 'Beklediğiniz paket geliyor', kind: 'sms', from: 'Sipariş verdiğiniz mağazanın teslimat bildirimi',
+        message: 'Siparişiniz bugün dağıtıma çıkmıştır. Teslimat durumunu alışveriş uygulamanızdan takip edebilirsiniz. Mesajda bağlantı, ödeme veya bilgi talebi yok. Uygulamayı kendiniz açtığınızda sipariş numarası ve dağıtım durumu da eşleşiyor.',
+        choices: [
+          'Her teslimat mesajını dolandırıcılık sayar, siparişi iptal ederim.',
+          'Gönderen adı aynıysa sonraki her mesajdaki isteği kabul ederim.',
+          'Uygulamadaki eşleşen siparişi takip eder, teslimatı beklerim.'
+        ], correct: 2,
+        explanation: 'Bu örnekte bildirimi bağımsız açtığınız uygulamadaki gerçek siparişinizle doğruladınız. Teslimatı takip edebilirsiniz. Bu mesajın doğrulanmış olması, aynı adla gelen sonraki istekleri otomatik olarak güvenilir yapmaz.',
+        clues: ['Bildirimin bağımsız açılan uygulamadaki siparişle eşleşmesi', 'Mesajda bağlantı, ödeme veya bilgi talebi olmaması'],
+        tip: 'Her mesajı reddetmek yerine bilgiyi bağımsız kanaldan doğrulayın; yeni talepleri ayrıca değerlendirin.',
+        review: 'Teslimat bildirimini bağımsız uygulamada doğrulayıp uygun davranışı seçme'
+      },
+      {
         id: 'p-okul', topic: 'Okul adına ödeme isteği', kind: 'sms', from: 'Okul Duyuru Hattı',
         message: 'Çocuğunuzun gezi katılımı için bugün 680 TL ödemeniz gerekiyor. Açıklamaya öğrencinin adını yazıp bu kişisel hesaba gönderin.',
         choices: [
@@ -89,7 +115,7 @@ window.TOD_DATA = {
         review: 'Okul adına gelen ödeme taleplerini doğrulama'
       },
       {
-        id: 'p-alisveris', topic: 'Sahte alışveriş ilanı', kind: 'social', from: 'AileSepeti Fırsatları',
+        id: 'p-alisveris', topic: 'Alışverişte büyük indirim', kind: 'social', from: 'AileSepeti Fırsatları',
         message: 'Bugüne özel yüzde 90 indirim! Ürün yalnızca firsat.example.com adresinde. Son on dakika; kart bilgilerinizi girip siparişi tamamlayın.',
         choices: [
           'İndirim bitmeden kart bilgilerimle sipariş veririm.',
@@ -128,7 +154,7 @@ window.TOD_DATA = {
         review: 'Yeni numaradan gelen aile içi para isteğini doğrulama'
       },
       {
-        id: 'p-kargo', topic: 'Sahte kargo ücreti', kind: 'sms', from: 'Paket Bilgilendirme',
+        id: 'p-kargo', topic: 'Kargonuz hakkında bir mesaj', kind: 'sms', from: 'Paket Bilgilendirme',
         message: 'Paketiniz dağıtıma çıkamadı. Teslim için 24 TL fark ödeyin ve kart bilgilerinizi paket.example.com sayfasına girin.',
         choices: [
           'Ücret küçük olduğu için kart bilgilerimi girerim.',
@@ -147,7 +173,7 @@ window.TOD_DATA = {
     description: 'Telefon, banka, emeklilik ve sağlık mesajlarında sakin doğrulama.',
     questions: [
       {
-        id: 's-polis', topic: 'Polis veya savcı taklidi', kind: 'call', from: 'Kendisini polis olarak tanıtan kişi',
+        id: 's-polis', topic: 'Bir soruşturma hakkında arama', kind: 'call', from: 'Kendisini polis olarak tanıtan kişi',
         message: 'Hesabınız bir soruşturmada geçiyor. Paranızı korumak için hemen vereceğim güvenli hesaba aktarın. Bu görüşmeyi kimseye söylemeyin.',
         choices: [
           'Görüşmeyi bitirip kuruma kendi bulduğum resmî kanaldan ulaşırım.',
@@ -186,7 +212,7 @@ window.TOD_DATA = {
         review: 'Promosyon mesajındaki bağlantıyı doğrulama'
       },
       {
-        id: 's-saglik', topic: 'Sahte sağlık randevusu', kind: 'sms', from: 'Randevu Bilgilendirme',
+        id: 's-saglik', topic: 'Sağlık randevunuz hakkında mesaj', kind: 'sms', from: 'Randevu Bilgilendirme',
         message: 'Sağlık randevunuz iptal edilmemesi için 39 TL onay ücreti gerekiyor. Ödemeyi bugün randevu.example.com adresinden yapın.',
         choices: [
           'Randevumu resmî sistemden veya sağlık kuruluşundan kontrol ederim.',
@@ -210,6 +236,19 @@ window.TOD_DATA = {
         clues: ['Beklenmedik ödül vaadi', 'Ödül için peşin ücret isteği'],
         tip: 'Ödülü almak için para istenirse ödeme yapmadan görüşmeyi durdurun.',
         review: 'Ödül vaadiyle istenen işlem ücretini sorgulama'
+      },
+      {
+        id: 's-yapay-video', topic: 'Aile grubundaki acil video', kind: 'social', from: 'Aile grubunda paylaşılan video',
+        message: 'Videodaki kişi yeğeninize hem görüntü hem ses olarak çok benziyor. “Telefonum bozuldu, 20 dakika içinde bu yeni hesaba para göndermen gerekiyor; kimseyi arama” diyor.',
+        choices: [
+          'Yüzü ve sesi tanıdık geldiği için parayı yeni hesaba gönderirim.',
+          'Videoyu paylaşan kişiye sorup hesap bilgisini doğrulanmış sayarım.',
+          'Yeğenimi bildiğim numaradan veya başka bir yakınımdan doğrularım.'
+        ], correct: 2,
+        explanation: 'Yapay zekâ ile üretilen görüntü ve sesler tanıdığınız birini taklit edebilir. Video tek başına kanıt değildir; para isteğini önceden bildiğiniz, bağımsız bir yoldan doğrulayın.',
+        clues: ['Çok kısa sürede para gönderme baskısı', 'Kimseyi aramama isteği ve yeni hesap bilgisi'],
+        tip: 'Yakınınızdan acil para isteği gelirse kayıtlı numarasından geri arayın.',
+        review: 'Yapay zekâ ile taklit edilen görüntü ve sesi bağımsız doğrulama'
       }
     ]
   }
