@@ -4,6 +4,8 @@
   const sidebar = document.getElementById('site-sidebar');
   const scrim = document.getElementById('sidebar-scrim');
   const navLinks = [...document.querySelectorAll('[data-site-nav]')];
+  const navGroups = [...document.querySelectorAll('[data-nav-group]')];
+  const currentSectionLabel = document.getElementById('current-section-label');
   const videos = [...document.querySelectorAll('#videos-screen video')];
   function setMenu(open) {
     document.body.classList.toggle('menu-open', open);
@@ -33,6 +35,19 @@
     'egitim-videolari': 'videos', 'medya-laboratuvari': 'media', olcme: 'assessment', 'saha-raporu': 'reports',
     'taktik-rehberi': 'guide', 'zarar-kontrolu': 'recovery'
   };
+  const navigationGroups = {
+    path: 'learn', videos: 'learn', guide: 'learn',
+    games: 'practice', decision: 'practice', practice: 'practice', media: 'practice', review: 'practice',
+    message: 'analyze', inspector: 'analyze', chat: 'analyze', recovery: 'analyze',
+    assessment: 'measure', reports: 'measure'
+  };
+  const sectionLabels = {
+    home: 'Ana sayfa', path: 'Öğrenme yolu', videos: 'Eğitim videoları', guide: 'Taktik rehberi',
+    games: 'Soru oyunları', decision: 'Karar simülatörü', practice: 'Tuzak laboratuvarı',
+    media: 'Medya doğrulama', review: 'Kısa tekrar', message: 'Mesaj inceleme',
+    inspector: 'Bağlantı ve QR', chat: 'Dijital güvenlik rehberi', recovery: 'Şimdi ne yapacağım?',
+    assessment: 'Ön test / Son test', reports: 'Saha raporu'
+  };
   function updateNavigation() {
     const hash = location.hash.slice(1);
     const section = routeGroups[hash] || (hash.startsWith('taktik-') ? 'guide' : 'home');
@@ -40,6 +55,9 @@
       if (link.dataset.siteNav === section) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
+    const activeGroup = navigationGroups[section];
+    if (activeGroup) navGroups.forEach((group) => { group.open = group.dataset.navGroup === activeGroup; });
+    currentSectionLabel.textContent = sectionLabels[section];
     if (section !== 'videos') videos.forEach((video) => video.pause());
     if (section !== 'chat') window.TOD_CHAT_GUIDE?.clearConversation();
     setMenu(false);

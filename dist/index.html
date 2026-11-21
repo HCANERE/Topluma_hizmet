@@ -34,90 +34,81 @@
   <a id="skip-link" class="skip-link" href="#main">İçeriğe geç</a>
   <div id="site-shell">
     <aside class="site-sidebar" id="site-sidebar" aria-label="Site bölümleri">
-      <a class="sidebar-brand" href="#ana-sayfa"><span class="brand-mark" aria-hidden="true">✦</span><span>Tıklamadan<br>Önce Düşün</span></a>
-      <p class="sidebar-label">KEŞFET</p>
+      <a class="sidebar-brand" href="#ana-sayfa"><span class="brand-mark" aria-hidden="true">T</span><span>Tıklamadan<br>Önce Düşün</span></a>
+      <p class="sidebar-project">Dijital güvenlik eğitim platformu</p>
       <nav class="sidebar-nav" aria-label="Ana gezinme">
-        <a href="#ana-sayfa" data-site-nav="home"><span aria-hidden="true">⌂</span> Ana sayfa</a>
-        <a href="#kategoriler" data-site-nav="games"><span aria-hidden="true">◫</span> Soru oyunları</a>
-        <a href="#tekrar-turu" data-site-nav="review"><span aria-hidden="true">↻</span> Kısa tekrar</a>
-        <a href="#karar-simulatoru" data-site-nav="decision"><span aria-hidden="true">◇</span> Karar simülatörü</a>
-        <a href="#mesaj-incele" data-site-nav="message"><span aria-hidden="true">✉</span> Mesaj inceleme</a>
-        <a href="#laboratuvar" data-site-nav="practice"><span aria-hidden="true">▦</span> Tuzak laboratuvarı</a>
-        <a href="#baglanti-incele" data-site-nav="inspector"><span aria-hidden="true">◎</span> Bağlantı ve QR</a>
-        <a href="#egitim-videolari" data-site-nav="videos"><span aria-hidden="true">▷</span> Eğitim videoları</a>
-        <a href="#medya-laboratuvari" data-site-nav="media"><span aria-hidden="true">▣</span> Medya doğrulama</a>
-        <a href="#olcme" data-site-nav="assessment"><span aria-hidden="true">◩</span> Ön test / Son test</a>
-        <a href="#saha-raporu" data-site-nav="reports"><span aria-hidden="true">▥</span> Saha raporu</a>
-        <a href="#ogrenme-yolu" data-site-nav="path"><span aria-hidden="true">↗</span> Öğrenme yolu</a>
-      </nav>
-      <p class="sidebar-label">REHBER</p>
-      <nav class="sidebar-nav" aria-label="Yardımcı içerikler">
-        <a href="#taktik-rehberi" data-site-nav="guide"><span aria-hidden="true">☰</span> Taktik rehberi</a>
-        <a href="#rehber-asistani" data-site-nav="chat"><span aria-hidden="true">◉</span> Rehber chatbot</a>
-        <a href="#zarar-kontrolu" data-site-nav="recovery"><span aria-hidden="true">✚</span> Şimdi ne yapacağım?</a>
+        <a class="sidebar-home" href="#ana-sayfa" data-site-nav="home">Ana sayfa</a>
+        <details class="nav-group" data-nav-group="learn" open><summary>Öğren</summary><div class="nav-group-links">
+          <a href="#ogrenme-yolu" data-site-nav="path">Öğrenme yolu</a>
+          <a href="#egitim-videolari" data-site-nav="videos">Eğitim videoları</a>
+          <a href="#taktik-rehberi" data-site-nav="guide">Taktik rehberi</a>
+        </div></details>
+        <details class="nav-group" data-nav-group="practice"><summary>Uygula</summary><div class="nav-group-links">
+          <a href="#kategoriler" data-site-nav="games">Soru oyunları</a>
+          <a href="#karar-simulatoru" data-site-nav="decision">Karar simülatörü</a>
+          <a href="#laboratuvar" data-site-nav="practice">Tuzak laboratuvarı</a>
+          <a href="#medya-laboratuvari" data-site-nav="media">Medya doğrulama</a>
+          <a href="#tekrar-turu" data-site-nav="review">Kısa tekrar</a>
+        </div></details>
+        <details class="nav-group" data-nav-group="analyze"><summary>İncele</summary><div class="nav-group-links">
+          <a href="#mesaj-incele" data-site-nav="message">Mesaj inceleme</a>
+          <a href="#baglanti-incele" data-site-nav="inspector">Bağlantı ve QR</a>
+          <a href="#rehber-asistani" data-site-nav="chat">Dijital güvenlik rehberi</a>
+          <a href="#zarar-kontrolu" data-site-nav="recovery">Şimdi ne yapacağım?</a>
+        </div></details>
+        <details class="nav-group" data-nav-group="measure"><summary>Değerlendir</summary><div class="nav-group-links">
+          <a href="#olcme" data-site-nav="assessment">Ön test / Son test</a>
+          <a href="#saha-raporu" data-site-nav="reports">Saha raporu</a>
+        </div></details>
       </nav>
       <div class="sidebar-foot"><strong>Dur. Düşün. Doğrula.</strong><span>Ücretsiz · Üyeliksiz · Türkçe</span><small id="offline-status" role="status"></small></div>
     </aside>
     <button class="sidebar-scrim" id="sidebar-scrim" type="button" aria-label="Menüyü kapat" hidden></button>
-    <header class="site-header wrap"><button class="menu-button" id="menu-button" type="button" aria-controls="site-sidebar" aria-expanded="false" aria-label="Menüyü aç">☰</button><a class="brand" href="#ana-sayfa" aria-label="Tıklamadan Önce Düşün ana sayfa"><span class="brand-mark" aria-hidden="true">✦</span><span>Tıklamadan<br>Önce Düşün</span></a><nav class="header-nav" aria-label="Hızlı erişim"><a class="header-link" href="#rehber-asistani">Rehbere sor</a><a class="header-link" href="#egitim-videolari">Videolar</a><a class="header-link" href="#olcme">Öğrenmeni ölç</a><button class="text-size-button" id="text-size" type="button" aria-pressed="false" aria-label="Büyük metni aç">Aa<span>Büyük metin</span></button></nav></header>
+    <header class="site-header wrap"><button class="menu-button" id="menu-button" type="button" aria-controls="site-sidebar" aria-expanded="false" aria-label="Menüyü aç">☰</button><a class="brand" href="#ana-sayfa" aria-label="Tıklamadan Önce Düşün ana sayfa"><span class="brand-mark" aria-hidden="true">T</span><span>Tıklamadan<br>Önce Düşün</span></a><div class="header-context"><span>EĞİTİM PLATFORMU</span><strong id="current-section-label">Ana sayfa</strong></div><nav class="header-nav" aria-label="Hızlı erişim"><a class="header-link" href="#ogrenme-yolu">Öğrenme yolu</a><a class="header-link header-action" href="#baglanti-incele">Şüpheli içeriği incele</a><button class="text-size-button" id="text-size" type="button" aria-pressed="false" aria-label="Büyük metni aç">Aa<span>Büyük metin</span></button></nav></header>
     <div id="home-screen">
       <main id="main" tabindex="-1">
-        <section class="hero wrap" aria-labelledby="home-title">
-          <div class="hero-copy"><p class="eyebrow hero-eyebrow"><span aria-hidden="true">✦</span> TOPLUM İÇİN DİJİTAL GÜVENLİK EĞİTİMİ</p><h1 id="home-title" tabindex="-1">Tıklamadan önce<br><span>düşün.</span></h1><p class="hero-lead">Şüpheli mesajları tanı, güvenli kararları prova et ve öğrendiklerini günlük hayatta kullan. Oyunlar, videolar, bağlantı inceleme ve kısa testler tek yerde.</p><div class="hero-actions"><a class="start-button hero-cta" href="#karar-simulatoru">Karar simülatörünü dene</a><a class="outline-button hero-cta" href="#ozellikler">Bölümleri keşfet</a></div><div class="hero-chips" aria-label="Platform özellikleri"><span>✓ Ücretsiz</span><span>✓ Üyelik yok</span><span>✓ Kişisel bilgi istenmez</span></div><p class="project-context">Selçuk Üniversitesi · Topluma Hizmet Uygulamaları</p></div>
-          <div class="hero-visual" role="img" aria-label="Kurgusal bir ödül mesajı ve güvenli karar hatırlatması: dur, düşün, doğrula.">
-            <div class="visual-orbit orbit-one"></div><div class="visual-orbit orbit-two"></div><span class="spark spark-one">✦</span><span class="spark spark-two">✳</span>
-            <div class="floating-label safe-label"><span>✓</span> Kontrol sende.</div>
-            <div class="demo-phone"><div class="phone-island"></div><div class="phone-status"><span>09:41</span><span>▮▮▮ ▰</span></div><div class="phone-contact"><span class="contact-avatar">?</span><div><strong>Bilinmeyen numara</strong><span>Yeni mesaj</span></div></div><div class="demo-message"><strong>Tebrikler! 🎁</strong><p>Büyük ödülü kazandınız. Hemen tıklayın, hediyenizi alın!</p><span class="fake-link">hediye.example.com</span><small>Kurgusal eğitim örneği</small></div><div class="phone-decision"><span>!</span><div><strong>Bir dakika…</strong><p>Bu mesaj güvenilir mi?</p></div></div><div class="phone-homebar"></div></div>
-            <div class="floating-label think-label"><span>✋</span><div><strong>Dur. Düşün. Doğrula.</strong><small>Acele etmen gerekmiyor.</small></div></div>
+        <section class="home-intro wrap" aria-labelledby="home-title">
+          <div class="home-intro-copy">
+            <p class="home-kicker">SELÇUK ÜNİVERSİTESİ · TOPLUMA HİZMET UYGULAMALARI ÖĞRENCİ PROJESİ</p>
+            <h1 id="home-title" tabindex="-1">Dijital dolandırıcılığa karşı <span>bilinçli kararlar.</span></h1>
+            <p class="home-lead">Günlük hayatta karşılaşabileceğiniz şüpheli mesajları tanıyın, doğru adımları kısa uygulamalarla deneyin ve öğrendiklerinizi ölçün.</p>
+            <div class="home-primary-actions"><a class="start-button" href="#ogrenme-yolu">Öğrenme yoluna başla</a><a class="outline-button" href="#kategoriler">Senaryo oyunlarını gör</a></div>
+            <p class="home-access-note">Ücretsiz · Üyeliksiz · Kişisel bilgi gerektirmez</p>
+          </div>
+          <aside class="home-help" aria-labelledby="home-help-title">
+            <p class="home-help-kicker">HIZLI YARDIM</p><h2 id="home-help-title">Şüpheli bir içerikle mi karşılaştınız?</h2>
+            <p>İşlemi durdurun. İçeriği açmadan veya bilgi paylaşmadan önce neye bakacağınızı öğrenin.</p>
+            <a href="#mesaj-incele"><strong>Mesajı incele</strong><span>SMS, e-posta veya ekran görüntüsü</span></a>
+            <a href="#baglanti-incele"><strong>Bağlantı veya QR incele</strong><span>Adresi açmadan yapısını gör</span></a>
+            <a href="#zarar-kontrolu"><strong>Bir işlem yaptım, şimdi ne olacak?</strong><span>Duruma göre güvenli ilk adımlar</span></a>
+            <small>Bu araçlar kesin güvenlik kararı veya virüs taraması sunmaz.</small>
+          </aside>
+        </section>
+        <section class="home-sequence wrap" id="ozellikler" aria-labelledby="features-title">
+          <div class="home-section-heading"><p class="home-kicker">ÖNERİLEN AKIŞ</p><h2 id="features-title" tabindex="-1">Öğren, uygula, değerlendir</h2><p>Kısa adımlarla başlayın. İstediğiniz bölüme doğrudan da geçebilirsiniz.</p></div>
+          <ol class="home-stage-grid">
+            <li class="home-stage"><span>Başlangıç</span><h3>Bilginizi görün</h3><p>Kısa ön testle hangi konulara odaklanacağınızı belirleyin.</p><a href="#olcme">Ön testi aç</a></li>
+            <li class="home-stage"><span>Öğrenme</span><h3>Konuyu anlayın</h3><p>Türkçe videoları ve anlaşılır taktik rehberini inceleyin.</p><a href="#egitim-videolari">Videoları izle</a></li>
+            <li class="home-stage"><span>Uygulama</span><h3>Kararı deneyin</h3><p>Kurgusal senaryolarda güvenli davranışı prova edin.</p><a href="#kategoriler">Oyunları aç</a></li>
+            <li class="home-stage"><span>Değerlendirme</span><h3>Gelişimi ölçün</h3><p>Son testle yalnızca bu eğitimdeki değişimi karşılaştırın.</p><a href="#olcme">Son teste geç</a></li>
+          </ol>
+        </section>
+        <section id="kategoriler" class="category-section" aria-labelledby="category-title"><div class="wrap">
+          <div class="home-section-heading"><p class="home-kicker">SENARYO OYUNLARI</p><h2 id="category-title" tabindex="-1">Size yakın örneklerle çalışın</h2><p>Kategoriler yalnızca örnekleri değiştirir. Dilediğiniz kategoriyi seçebilirsiniz; her tur beş sorudur ve süre sınırı yoktur.</p></div>
+          <div class="category-grid">
+            <article class="category-card youth-card"><p class="card-kicker">GENÇLER</p><h3>Burs, oyun ve sosyal medya</h3><p>Sahte burs duyuruları, hesap doğrulama istekleri ve arkadaş adına gönderilen mesajlar.</p><p class="category-progress" data-progress="youth">5 soruluk tur · 6 farklı örnek</p><button type="button" class="start-button" data-category="youth" aria-label="Gençler kategorisinde oyuna başla">Oyuna başla</button></article>
+            <article class="category-card parent-card"><p class="card-kicker">EBEVEYNLER</p><h3>Aile ve günlük işlemler</h3><p>Okul ödemeleri, alışveriş bağlantıları, kargo mesajları ve aile bireyi taklidi.</p><p class="category-progress" data-progress="parents">5 soruluk tur · 6 farklı örnek</p><button type="button" class="start-button" data-category="parents" aria-label="Ebeveynler kategorisinde oyuna başla">Oyuna başla</button></article>
+            <article class="category-card senior-card"><p class="card-kicker">İLERİ YAŞ</p><h3>Telefon, banka ve sağlık</h3><p>Resmî görevli taklidi, banka kodu talepleri, sağlık randevusu ve promosyon vaatleri.</p><p class="category-progress" data-progress="seniors">5 soruluk tur · 6 farklı örnek</p><button type="button" class="start-button" data-category="seniors" aria-label="İleri yaştaki kullanıcılar kategorisinde oyuna başla">Oyuna başla</button></article>
+          </div>
+        </div></section>
+        <section class="home-library wrap" id="pratik" aria-labelledby="practice-home-title"><div class="home-section-heading"><p class="home-kicker">TÜM BÖLÜMLER</p><h2 id="practice-home-title" tabindex="-1">İhtiyacınız olan aracı bulun</h2><p>Bir konuyu öğrenebilir, kurgusal bir durum üzerinde çalışabilir veya elinizdeki içeriği inceleyebilirsiniz.</p></div>
+          <div class="home-library-grid">
+            <div class="home-library-group"><h3>Öğren ve uygula</h3><a href="#ogrenme-yolu"><strong>Öğrenme yolu</strong><span>Eğitim adımlarını sırayla izleyin</span></a><a href="#taktik-rehberi"><strong>Taktik rehberi</strong><span>Dolandırıcılık yöntemlerini anlayın</span></a><a href="#karar-simulatoru"><strong>Karar simülatörü</strong><span>Güvenli kararı üç adımda prova edin</span></a><a href="#laboratuvar"><strong>Tuzak laboratuvarı</strong><span>Bir kararın sonucunu görün</span></a><a href="#tekrar-turu"><strong>Kısa tekrar</strong><span>Gözden kaçan konulara dönün</span></a></div>
+            <div class="home-library-group"><h3>İçeriği incele</h3><a href="#mesaj-incele"><strong>Mesaj inceleme</strong><span>Şüpheli ifadelerin nedenini görün</span></a><a href="#baglanti-incele"><strong>Bağlantı ve QR</strong><span>Adresi açmadan yapısını öğrenin</span></a><a href="#medya-laboratuvari"><strong>Medya doğrulama</strong><span>Video ve ses iddialarını sorgulayın</span></a><a href="#rehber-asistani"><strong>Dijital güvenlik rehberi</strong><span>Sorunuza ilgili eğitim bölümünü bulun</span></a><a href="#zarar-kontrolu"><strong>Şimdi ne yapacağım?</strong><span>Olay sonrası ilk adımları öğrenin</span></a></div>
+            <div class="home-library-group"><h3>Eğitimi değerlendir</h3><a href="#egitim-videolari"><strong>Eğitim videoları</strong><span>Konuları kısa anlatımlarla izleyin</span></a><a href="#olcme"><strong>Ön test / Son test</strong><span>Eğitimdeki değişimi karşılaştırın</span></a><a href="#saha-raporu"><strong>Anonim saha raporu</strong><span>Toplu sonuçları cihazınızda birleştirin</span></a></div>
           </div>
         </section>
-        <div class="trust-strip"><div class="wrap"><span>Güvenli dijital davranışı birlikte öğrenelim.</span><strong>3 hedef kitle</strong><span class="strip-divider" aria-hidden="true"></span><strong>18 oyun senaryosu</strong><span class="strip-divider" aria-hidden="true"></span><strong>7 eğitim videosu</strong></div></div>
-        <section class="feature-showcase wrap" id="ozellikler" aria-labelledby="features-title">
-          <div class="section-heading"><div><p class="eyebrow">PLATFORMU KEŞFET</p><h2 id="features-title" tabindex="-1">İhtiyacın olan bölümü seç</h2></div><p>Her bölüm kısa, anlaşılır ve günlük hayatta uygulanabilir bir güvenlik adımına odaklanır.</p></div>
-          <div class="feature-grid">
-            <a class="feature-card" href="#kategoriler"><span class="feature-icon" aria-hidden="true">◫</span><span class="feature-type">OYNA</span><strong>Soru oyunları</strong><span>Gençler, ebeveynler ve ileri yaştaki kullanıcılar için kısa senaryolar.</span><span class="feature-action">Kategori seç</span></a>
-            <a class="feature-card" href="#tekrar-turu"><span class="feature-icon" aria-hidden="true">↻</span><span class="feature-type">TEKRAR ET</span><strong>Kişisel tekrar turu</strong><span>Yanlış cevapladığın konuları bu cihazda yeniden dene.</span><span class="feature-action">Tekrarları gör</span></a>
-            <a class="feature-card" href="#karar-simulatoru"><span class="feature-icon" aria-hidden="true">◇</span><span class="feature-type">KARAR VER</span><strong>Karar simülatörü</strong><span>Mesajı incele, doğrulama yolunu seç ve kararının sonucunu gör.</span><span class="feature-action">Simülasyona geç</span></a>
-            <a class="feature-card" href="#baglanti-incele"><span class="feature-icon" aria-hidden="true">◎</span><span class="feature-type">İNCELE</span><strong>Bağlantı ve QR</strong><span>Bir adresin yapısını cihazında incele. Bağlantı açılmaz.</span><span class="feature-action">Aracı aç</span></a>
-            <a class="feature-card" href="#mesaj-incele"><span class="feature-icon" aria-hidden="true">✉</span><span class="feature-type">ANLA</span><strong>Şüpheli mesaj inceleme</strong><span>Bir SMS veya e-postadaki baskı ve bilgi isteme işaretlerini, metni göndermeden öğren.</span><span class="feature-action">Mesajı incele</span></a>
-            <a class="feature-card" href="#egitim-videolari"><span class="feature-icon" aria-hidden="true">▷</span><span class="feature-type">İZLE</span><strong>Eğitim videoları</strong><span>Oltalama, sahte kargo, yapay ses ve video gibi konuları kısa anlatımlarla öğren.</span><span class="feature-action">Videoları gör</span></a>
-            <a class="feature-card" href="#medya-laboratuvari"><span class="feature-icon" aria-hidden="true">▣</span><span class="feature-type">DOĞRULA</span><strong>Medya doğrulama</strong><span>Video ve ses iddialarında kaynak, tarih ve bağımsız kanıtı sorgula.</span><span class="feature-action">Laboratuvara geç</span></a>
-            <a class="feature-card" href="#olcme"><span class="feature-icon" aria-hidden="true">◩</span><span class="feature-type">ÖLÇ</span><strong>Ön test / Son test</strong><span>Eğitim öncesi ve sonrası bilgini karşılaştır; toplu saha sonucunu çıkar.</span><span class="feature-action">Ölçmeye başla</span></a>
-            <a class="feature-card" href="#saha-raporu"><span class="feature-icon" aria-hidden="true">▥</span><span class="feature-type">BİRLEŞTİR</span><strong>Anonim saha raporu</strong><span>Farklı cihazlardaki toplu sonuçları yalnızca bu tarayıcıda birleştir.</span><span class="feature-action">Raporu aç</span></a>
-            <a class="feature-card" href="#zarar-kontrolu"><span class="feature-icon" aria-hidden="true">✚</span><span class="feature-type">ADIM AT</span><strong>Şimdi ne yapacağım?</strong><span>Şüpheli bir bağlantı açtıysan veya kod paylaştıysan güvenli adımları gör.</span><span class="feature-action">Rehberi aç</span></a>
-            <a class="feature-card" href="#ogrenme-yolu"><span class="feature-icon" aria-hidden="true">↗</span><span class="feature-type">SIRAYLA ÖĞREN</span><strong>Öğrenme yolu</strong><span>Ön testten kısa videoya ve uygulamaya uzanan adımları kendi hızında izle.</span><span class="feature-action">Yola başla</span></a>
-            <a class="feature-card" href="#rehber-asistani"><span class="feature-icon" aria-hidden="true">◉</span><span class="feature-type">SOR</span><strong>Dijital Güvenlik Rehberi</strong><span>Sorunu Türkçe yaz; ilgili eğitim veya yardım bölümünü kaynak göstererek bul.</span><span class="feature-action">Rehbere sor</span></a>
-          </div>
-        </section>
-        <section class="practice-section" id="pratik" aria-labelledby="practice-home-title">
-          <div class="wrap">
-            <h2 id="practice-home-title" tabindex="-1">Etkileşimli pratik</h2>
-            <div class="practice-entry-grid">
-              <a class="practice-entry" href="#laboratuvar">
-                <strong>Tuzak Laboratuvarı</strong>
-                <span>Bir mesajı incele ve kararının hikâyeyi nasıl değiştirdiğini gör.</span>
-              </a>
-              <a class="practice-entry" href="#taktik-rehberi">
-                <strong>Taktik Rehberi</strong>
-                <span>Dolandırıcılık işaretlerini ve bir isteği nasıl doğrulayacağını öğren.</span>
-              </a>
-              <a class="practice-entry" href="#zarar-kontrolu">
-                <strong>Şimdi Ne Yapacağım?</strong>
-                <span>Bir bağlantı açtıktan veya giriş kodu paylaştıktan sonraki adımları dene.</span>
-              </a>
-              <a class="practice-entry" href="#baglanti-incele">
-                <strong>Bağlantı ve QR incele</strong>
-                <span>Adresin nereye yöneldiğini gör; dikkat gerektiren işaretleri öğren.</span>
-              </a>
-            </div>
-          </div>
-        </section>
-        <section id="kategoriler" class="category-section" aria-labelledby="category-title"><div class="wrap"><div class="section-heading"><div><p class="eyebrow">KATEGORİNİ SEÇ</p><h2 id="category-title" tabindex="-1">Senin dünyan, senin kararın.</h2></div><p>Sana yakın bir kategori seç. Mesajları incele, kararını ver ve gözden kaçan işaretleri keşfet.</p></div><div class="category-grid">
-          <article class="category-card youth-card"><div class="card-icon young" aria-hidden="true">✦</div><p class="card-kicker">SOSYAL HAYAT & DİJİTAL DÜNYA</p><h3>Gençler</h3><p>Burs, oyun hesabı, sosyal medya ve iş ilanlarında güvenli kararlar.</p><div class="card-topics">Burs · Oyun · Sosyal medya</div><p class="category-progress" data-progress="youth">Kısa senaryolar · Başlamaya hazır</p><button type="button" class="start-button" data-category="youth" aria-label="Gençler kategorisinde oyuna başla">Oyuna Başla</button></article>
-          <article class="category-card parent-card"><div class="card-icon parent" aria-hidden="true">⌂</div><p class="card-kicker">AİLE & GÜNLÜK YAŞAM</p><h3>Ebeveynler</h3><p>Okul, alışveriş, aile ve kargo mesajlarında dikkat edilecekler.</p><div class="card-topics">Okul · Alışveriş · Mahremiyet</div><p class="category-progress" data-progress="parents">Kısa senaryolar · Başlamaya hazır</p><button type="button" class="start-button" data-category="parents" aria-label="Ebeveynler kategorisinde oyuna başla">Oyuna Başla</button></article>
-          <article class="category-card senior-card"><div class="card-icon senior" aria-hidden="true">☀</div><p class="card-kicker">GÜVEN & SAKİN KARARLAR</p><h3>İleri yaş</h3><p>Telefon, banka, emeklilik ve sağlık mesajlarını sakin biçimde doğrulama.</p><div class="card-topics">Telefon · Banka · Sağlık</div><p class="category-progress" data-progress="seniors">Kısa senaryolar · Başlamaya hazır</p><button type="button" class="start-button" data-category="seniors" aria-label="İleri yaştaki kullanıcılar kategorisinde oyuna başla">Oyuna Başla</button></article>
-        </div></div></section>
-        <section class="how-section wrap" id="nasil-calisir" aria-labelledby="how-title"><div><p class="eyebrow">KENDİ HIZINDA ÖĞREN</p><h2 id="how-title" tabindex="-1">Üç adımda güvenli alışkanlık</h2><a class="outline-button path-home-link" href="#ogrenme-yolu">Adım adım öğrenme yoluna geç</a></div><ol><li><strong>Başlangıcını gör.</strong><span>İstersen önce kısa ve anonim bir ön test çöz.</span></li><li><strong>Oyna ve uygula.</strong><span>Videoları izle, kurgusal mesajlarda karar ver, bağlantı ve QR adreslerini açmadan incele.</span></li><li><strong>Gelişimini ölç.</strong><span>Son testi çöz; eğitim sırasında öğrendiklerini günlük hayata taşı.</span></li></ol></section>
+        <section class="home-method" id="nasil-calisir" aria-labelledby="how-title"><div class="wrap home-method-inner"><div><p class="home-kicker">YAKLAŞIMIMIZ</p><h2 id="how-title" tabindex="-1">Durun. Düşünün. Bağımsız kaynaktan doğrulayın.</h2></div><div><p>Bir mesajın logosu, düzgün yazılması veya bağlantıdaki kilit simgesi tek başına güvenilirlik kanıtı değildir. Kuruma, mesajın içindeki numara veya bağlantı yerine kendi bulduğunuz resmî kanaldan ulaşın.</p><p>Senaryolar kurgusaldır. Araçlar dikkat edilmesi gereken işaretleri açıklar; kesin dolandırıcılık ya da virüs kararı vermez.</p></div></div></section>
       </main>
     </div>
     <main id="practice-screen" class="practice-section practice-screen" aria-labelledby="practice-title" tabindex="-1" hidden>
