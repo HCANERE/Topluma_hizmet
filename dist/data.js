@@ -1,4 +1,4 @@
-/* Senaryolar burada tutulur. Kategoriler farklı sayıda soru içerebilir. */
+/* Senaryolar burada tutulur. Her tur, ilgili kategoriden rastgele beş soru seçer. */
 window.TOD_DATA = {
   youth: {
     title: 'Gençler',
@@ -236,6 +236,19 @@ window.TOD_DATA = {
         clues: ['Beklenmedik ödül vaadi', 'Ödül için peşin ücret isteği'],
         tip: 'Ödülü almak için para istenirse ödeme yapmadan görüşmeyi durdurun.',
         review: 'Ödül vaadiyle istenen işlem ücretini sorgulama'
+      },
+      {
+        id: 's-yapay-video', topic: 'Aile grubundaki acil video', kind: 'social', from: 'Aile grubunda paylaşılan video',
+        message: 'Videodaki kişi yeğeninize hem görüntü hem ses olarak çok benziyor. “Telefonum bozuldu, 20 dakika içinde bu yeni hesaba para göndermen gerekiyor; kimseyi arama” diyor.',
+        choices: [
+          'Yüzü ve sesi tanıdık geldiği için parayı yeni hesaba gönderirim.',
+          'Videoyu paylaşan kişiye sorup hesap bilgisini doğrulanmış sayarım.',
+          'Yeğenimi bildiğim numaradan veya başka bir yakınımdan doğrularım.'
+        ], correct: 2,
+        explanation: 'Yapay zekâ ile üretilen görüntü ve sesler tanıdığınız birini taklit edebilir. Video tek başına kanıt değildir; para isteğini önceden bildiğiniz, bağımsız bir yoldan doğrulayın.',
+        clues: ['Çok kısa sürede para gönderme baskısı', 'Kimseyi aramama isteği ve yeni hesap bilgisi'],
+        tip: 'Yakınınızdan acil para isteği gelirse kayıtlı numarasından geri arayın.',
+        review: 'Yapay zekâ ile taklit edilen görüntü ve sesi bağımsız doğrulama'
       }
     ]
   }

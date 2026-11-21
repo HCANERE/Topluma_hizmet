@@ -24,7 +24,7 @@ Kod değişikliklerini `npm test` ile doğrulayın.
 
 - `dist/index.html`: Ana sayfa, oyun ve sonuç ekranları.
 - `dist/style.css`: Görünüm ve mobil/erişilebilir düzen.
-- `dist/data.js`: Üç kategorideki 17 kurgusal senaryo ve açıklamaları. Soruları düzenlemek için bu dosyayı kullanın.
+- `dist/data.js`: Üç kategorideki 18 kurgusal senaryo ve açıklamaları. Her turda kategoriden rastgele beş soru seçilir; her doğru cevap 20 puandır.
 - `dist/app.js`: Ekranlar arası gezinme, kategori seçimi, cevap kontrolü ve puanlama.
 - `dist/lab-scenarios.js`: Laboratuvarın sahneleri, inceleme adımları ve her sürümün sonuçları.
 - `dist/practice.js` ve `dist/practice.css`: Laboratuvar, taktik rehberi ve kurtarma alıştırmalarının davranışı ve stili.
@@ -51,6 +51,6 @@ Kontroller: `node checks.mjs`, `node tests/game-flow.mjs` ve `node --check dist/
 
 ## Yeni senaryolar ve tur akışı
 
-Gençler kategorisine menü görüntülemek için kart bilgisi isteyen bir QR sayfası, ebeveynler kategorisine bağımsız uygulamada doğrulanmış bir teslimat bildirimi eklendi. Gençler ve ebeveynler altışar, ileri yaş kategorisi beş senaryo içerir. Her turda seçilen kategorinin tüm soruları karıştırılır; aynı soru tur içinde tekrarlanmaz. Puan ve ilerleme soru sayısına göre hesaplanır.
+Gençler kategorisine menü görüntülemek için kart bilgisi isteyen bir QR sayfası, ebeveynler kategorisine bağımsız uygulamada doğrulanmış bir teslimat bildirimi, ileri yaş kategorisine yapay ses/video taklidi örneği eklendi. Her kategoride altı senaryo vardır. Her turda bunların beşi karıştırılarak seçilir; aynı soru tur içinde tekrarlanmaz. Her doğru cevap 20 puandır.
 
 Başlıklardaki cevabı ele veren ifadeler kaldırıldı. Geri bildirimde kullanılan “Dikkat edilecek noktalar” başlığı hem riskli hem de doğrulanmış örnekleri kapsar.

@@ -15,6 +15,7 @@
   const practiceLinks = document.querySelectorAll('[data-practice-link]');
   const tacticCards = new Map(Array.from(document.querySelectorAll('.tactic-card'), (card) => [card.id, card]));
   const labels = { sms: 'SMS konuşması', email: 'E-posta', social: 'Sosyal medya mesajı', call: 'Telefon görüşmesi' };
+  const questionsPerRound = 5;
   const state = { category: null, index: 0, correct: 0, answered: false, missed: [], questions: [] };
 
   // Local preferences contain only display settings and category scores.
@@ -30,7 +31,7 @@
       const score = progress[node.dataset.progress];
       node.textContent = Number.isInteger(score) && score >= 0 && score <= 100
         ? `✓ Tamamlandı · En iyi puan: ${score} / 100`
-        : `${bank[node.dataset.progress].questions.length} senaryo · Başlamaya hazır`;
+        : `5 soruluk tur · ${bank[node.dataset.progress].questions.length} farklı örnek`;
     });
   }
   const textToggle = document.querySelector('#text-size');
@@ -44,6 +45,16 @@
     const enabled = textToggle.getAttribute('aria-pressed') !== 'true';
     setLargeText(enabled);
     try { localStorage.setItem('tod-large-text', String(enabled)); } catch (_) {}
+  });
+  document.querySelector('#clear-local-data').addEventListener('click', () => {
+    progress = {};
+    try {
+      localStorage.removeItem(storageKey);
+      localStorage.removeItem('tod-large-text');
+    } catch (_) { /* The in-memory state is cleared even without storage access. */ }
+    setLargeText(false);
+    updateProgress();
+    document.querySelector('#clear-local-status').textContent = 'Bu cihazdaki oyun kayıtları temizlendi.';
   });
   updateProgress();
 
@@ -220,7 +231,7 @@
   function start(category) {
     if (!bank || !bank[category] || bank[category].questions.length === 0) return;
     state.category = category;
-    state.questions = shuffle(bank[category].questions);
+    state.questions = shuffle(bank[category].questions).slice(0, questionsPerRound);
     state.index = 0;
     state.correct = 0;
     state.answered = false;

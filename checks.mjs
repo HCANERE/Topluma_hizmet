@@ -30,5 +30,5 @@ for (const [category, group] of Object.entries(bank)) {
     assert.ok(index < group.questions.length);
   }
 }
-assert.equal(ids.size, 17);
-console.log('17 scenarios, 3 categories, choices, explanations, and example domains verified.');
+assert.equal(ids.size, 18);
+console.log('18 scenarios, 3 categories, choices, explanations, and example domains verified.');

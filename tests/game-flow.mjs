@@ -95,7 +95,8 @@ function launch(stored = {}, blocked = false, initialHash = '') {
   };
   const context = {document, window, localStorage: {
     getItem: (key) => { if (blocked) throw Error('Disabled'); return stored[key] ?? null; },
-    setItem: (key, value) => { if (blocked) throw Error('Disabled'); stored[key] = value; }
+    setItem: (key, value) => { if (blocked) throw Error('Disabled'); stored[key] = value; },
+    removeItem: (key) => { if (blocked) throw Error('Disabled'); delete stored[key]; }
   }};
   vm.createContext(context);
   for (const path of scriptFiles) vm.runInContext(fs.readFileSync(new URL(`../dist/${path}`, import.meta.url), 'utf8'), context);
@@ -104,17 +105,18 @@ function launch(stored = {}, blocked = false, initialHash = '') {
 function finish(game, category, correct = true) {
   game.starters.find((node) => node.dataset.category === category).click();
   const questions = game.bank[category].questions;
+  const roundLength = 5;
   const seen = new Set();
-  for (let index = 0; index < questions.length; index += 1) {
+  for (let index = 0; index < roundLength; index += 1) {
     const question = questions.find((item) => item.topic === game.ids.get('question-title').textContent);
     assert.ok(question);
     assert.ok(!seen.has(question.id), 'Each question appears once per round');
     seen.add(question.id);
-    assert.equal(game.ids.get('progress-text').textContent, `Soru ${index + 1} / ${questions.length}`);
+    assert.equal(game.ids.get('progress-text').textContent, `Soru ${index + 1} / ${roundLength}`);
     const buttons = game.ids.get('choices').children;
     buttons[correct ? question.correct : (question.correct + 1) % 3].click();
     const score = game.ids.get('live-score').textContent;
-    assert.equal(score, String(correct ? Math.round((index + 1) * 100 / questions.length) : 0));
+    assert.equal(score, String(correct ? (index + 1) * 20 : 0));
     buttons[question.correct].click(); // Guard against duplicate answers.
     assert.equal(game.ids.get('live-score').textContent, score);
     assert.ok(buttons.every((node) => node.disabled));
@@ -129,7 +131,7 @@ for (const category of ['youth', 'parents', 'seniors']) finish(game, category);
 assert.ok(game.progress.every((node) => node.textContent.includes('100 / 100')));
 finish(game, 'youth', false);
 assert.equal(JSON.parse(game.stored['tod-progress-v1']).youth, 100);
-assert.equal(game.ids.get('review-content').children[1].children.length, game.bank.youth.questions.length);
+assert.equal(game.ids.get('review-content').children[1].children.length, 5);
 game.ids.get('replay-button').click();
 assert.equal(game.ids.get('live-score').textContent, '0');
 game.ids.get('leave-game').click();
@@ -137,6 +139,12 @@ assert.equal(game.ids.get('home-screen').hidden, false);
 game.ids.get('text-size').click();
 assert.equal(game.document.documentElement.className, 'large-text');
 assert.equal(launch(game.stored).ids.get('text-size').getAttribute('aria-pressed'), 'true');
+game.ids.get('clear-local-data').click();
+assert.equal(game.stored['tod-progress-v1'], undefined);
+assert.equal(game.stored['tod-large-text'], undefined);
+assert.equal(game.ids.get('text-size').getAttribute('aria-pressed'), 'false');
+assert.ok(game.progress.every((node) => node.textContent.includes('5 soruluk tur')));
+assert.equal(game.ids.get('clear-local-status').textContent, 'Bu cihazdaki oyun kayıtları temizlendi.');
 finish(launch({}, true), 'seniors');
 finish(launch({'tod-progress-v1': '{invalid'}), 'parents');
 finish(launch({'tod-progress-v1': 'null'}), 'youth');
