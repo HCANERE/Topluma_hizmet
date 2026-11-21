@@ -8,6 +8,6 @@
   "scripts": {
     "start": "node scripts/serve.mjs",
     "start:reputation": "node scripts/reputation-service.mjs",
-    "test": "node checks.mjs && node tests/game-flow.mjs && node tests/learning-content.mjs && node tests/new-modules.mjs && node tests/chatbot.mjs"
+    "test": "node checks.mjs && node tests/game-flow.mjs && node tests/learning-content.mjs && node tests/new-modules.mjs && node tests/chatbot.mjs && node tests/expansion.mjs"
   }
 }

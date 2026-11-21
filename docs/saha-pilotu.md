@@ -8,11 +8,14 @@ Her hedef kitleden en az iki gönüllüyle ayrı ayrı, yaklaşık 10–15 dakik
 
 1. Katılımcıdan ana sayfada **rehber chatbot**, **eğitim videoları** ve **ön test/son test** bölümlerini bulması istenir. Yardım gerektiren yerler not edilir.
 2. Chatbota kurgusal bir kargo sorusu sorulur. Yanıtın bağlantılı olduğu site içeriği açılır; anlaşılmayan ifadeler not edilir.
-3. Kurgusal kargo örneğiyle mesaj inceleme yaptırılır. “Burada neden durup doğrulamalıyız?” sorusu sorulur.
-4. `https://banka.example.com.tr@giris.example.com.tr/hesap` örneğiyle bağlantı aracı denenir. Katılımcıdan gerçek alan adını söylemesi istenir.
+3. Kurgusal kargo örneğiyle mesaj inceleme yaptırılır. İstenirse yalnızca ekipçe hazırlanmış örnek ekran görüntüsüyle OCR denenir; okuma hatasını düzeltme adımı gözlenir. “Burada neden durup doğrulamalıyız?” sorusu sorulur.
+4. `https://banka.example.com@giris.example.com/hesap` örneğiyle bağlantı aracı denenir. Katılımcıdan gerçek alan adını söylemesi istenir.
 5. Kısa bir video açılır, Türkçe altyazı ve ses kontrolü denenir.
 6. Bir karar senaryosu çözülür; gerekçe, düğmelerin büyüklüğü ve metin açıklığı hakkında geri bildirim alınır.
-7. İstekli katılımcı anonim ön test, eğitim ve son test akışını tamamlar. Oyun puanı ölçüm sonucuna eklenmez.
+7. Medya doğrulama laboratuvarındaki kurgusal örnekte kaynağı ve tarihi sorgulama adımı denenir.
+8. İstekli katılımcı anonim ön test, eğitim ve son test akışını tamamlar. Oyun puanı ve tekrar turu ölçüm sonucuna eklenmez.
+
+Ekip ayrıca oturumsuz ilerleme yedeğini ve toplu CSV birleştirmeyi kurgusal dosyalarla kendi cihazlarında sınar. Senaryo atölyesinde üretilen içerik yayımlanmadan önce iki ekip üyesi tarafından dil, eğitim doğruluğu ve kişisel bilgi açısından gözden geçirilir.
 
 ## Gözlem notları
 

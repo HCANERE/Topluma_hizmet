@@ -32,7 +32,7 @@ class Node {
 }
 const html = fs.readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
 const scriptFiles = Array.from(html.matchAll(/<script src="([\w-]+\.js)" defer><\/script>/g), ([, file]) => file)
-  .filter((file) => ['data.js', 'app.js', 'lab-scenarios.js', 'practice.js', 'url-inspector.js'].includes(file));
+  .filter((file) => ['data.js', 'extra-scenarios.js', 'app.js', 'lab-scenarios.js', 'practice.js', 'url-inspector.js'].includes(file));
 function launch(stored = {}, blocked = false, initialHash = '') {
   const ids = new Map();
   const views = [];
@@ -148,11 +148,26 @@ game.ids.get('replay-button').click();
 assert.equal(game.ids.get('live-score').textContent, '0');
 game.ids.get('leave-game').click();
 assert.equal(game.ids.get('home-screen').hidden, false);
+assert.equal(game.window.TOD_REVIEW.dueQuestions().length, 5);
+game.window.location.hash = '#tekrar-turu';
+assert.equal(game.ids.get('review-screen').hidden, false);
+game.ids.get('review-start').click();
+for (let index = 0; index < 5; index += 1) {
+  const current = game.window.TOD_REVIEW.dueQuestions().find((item) => item.topic === game.ids.get('question-title').textContent) || game.bank.youth.questions.find((item) => item.topic === game.ids.get('question-title').textContent);
+  assert.ok(current, 'Review question is from the existing bank');
+  game.ids.get('choices').children[current.correct].click();
+  game.ids.get('next-button').click();
+}
+assert.equal(game.ids.get('result-screen').hidden, false);
+assert.equal(game.ids.get('result-category').textContent, 'Kısa tekrar turu');
+assert.equal(game.window.TOD_REVIEW.dueQuestions().length, 0);
+assert.equal(game.ids.get('replay-button').hidden, true);
 game.ids.get('text-size').click();
 assert.equal(game.document.documentElement.className, 'large-text');
 assert.equal(launch(game.stored).ids.get('text-size').getAttribute('aria-pressed'), 'true');
 game.ids.get('clear-local-data').click();
 assert.equal(game.stored['tod-progress-v1'], undefined);
+assert.equal(game.stored['tod-review-v1'], undefined);
 assert.equal(game.stored['tod-large-text'], undefined);
 assert.equal(game.ids.get('text-size').getAttribute('aria-pressed'), 'false');
 assert.ok(game.progress.every((node) => node.textContent.includes('5 soruluk tur')));

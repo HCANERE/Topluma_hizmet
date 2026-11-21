@@ -130,7 +130,8 @@
   function exportCsv() {
     if (!aggregate.count) { byId('report-status').textContent = 'İndirilecek tamamlanmış oturum yok.'; return; }
     const rows = [
-      ['Ölçüt', 'Değer'], ['Tamamlanan oturum', aggregate.count],
+      ['Ölçüt', 'Değer'], ['Biçim sürümü', 2], ['Tamamlanan oturum', aggregate.count],
+      ['Ön test doğru toplamı', aggregate.preTotal], ['Son test doğru toplamı', aggregate.postTotal],
       ['Ön test ortalaması (%)', (aggregate.preTotal * 20 / aggregate.count).toFixed(1)],
       ['Son test ortalaması (%)', (aggregate.postTotal * 20 / aggregate.count).toFixed(1)],
       ['Fark (yüzde puan)', ((aggregate.postTotal - aggregate.preTotal) * 20 / aggregate.count).toFixed(1)],

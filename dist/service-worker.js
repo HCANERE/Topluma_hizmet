@@ -1,9 +1,9 @@
-const CACHE = 'tod-training-v7';
+const CACHE = 'tod-training-v9';
 const CORE = [
   './', 'index.html', 'style.css', 'practice.css', 'portal.css', 'favicon.svg', 'manifest.webmanifest',
-  'data.js', 'app.js', 'lab-scenarios.js', 'practice.js', 'url-inspector.js',
-  'decision-data.js', 'decision.js', 'assessment.js', 'message-analyzer.js', 'learning-path.js',
-  'chatbot-data.js', 'chatbot.js', 'portal.js',
+  'data.js', 'extra-scenarios.js', 'app.js', 'lab-scenarios.js', 'practice.js', 'url-inspector.js',
+  'decision-data.js', 'decision.js', 'assessment.js', 'report-merge.js', 'message-analyzer.js', 'image-ocr.js', 'learning-path.js', 'guest-progress.js',
+  'chatbot-data.js', 'chatbot.js', 'media-lab.js', 'portal.js',
   'vendor/jsQR.js', 'vendor/public_suffix_list.dat',
   'media/poster-wide.svg', 'media/poster-portrait.svg'
 ];
@@ -20,6 +20,16 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET' || url.origin !== self.location.origin || /\/media\/.*\.(?:mp4|vtt)$/.test(url.pathname) || request.headers.has('range')) return;
   if (request.mode === 'navigate') {
     event.respondWith(fetch(request).catch(() => caches.match('./')));
+    return;
+  }
+  if (url.pathname.includes('/vendor/ocr/')) {
+    event.respondWith(caches.open(CACHE).then(async (cache) => {
+      const cached = await cache.match(request);
+      if (cached) return cached;
+      const response = await fetch(request);
+      if (response.ok) await cache.put(request, response.clone());
+      return response;
+    }));
     return;
   }
   event.respondWith(caches.match(request).then((cached) => cached || fetch(request)));

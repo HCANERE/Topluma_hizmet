@@ -2,3 +2,4 @@
 Thumbs.db
 *.tar.gz
 outputs/
+.ocr-build/

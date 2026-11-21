@@ -12,6 +12,7 @@ const types = new Map([
   ['dat', 'text/plain; charset=utf-8'],
   ['vtt', 'text/vtt; charset=utf-8'],
   ['mp4', 'video/mp4'],
+  ['gz', 'application/gzip'],
   ['webmanifest', 'application/manifest+json'],
 ]);
 
@@ -23,7 +24,12 @@ export async function serveStatic(request, response) {
 
   const path = (request.url ?? '/').split('?', 1)[0];
   const file = path === '/' ? 'index.html' : path.slice(1);
-  const match = /^(?:(?:vendor|media)\/)?[a-z0-9][a-z0-9._-]*\.([a-z0-9]+)$/i.exec(file);
+  const parts = file.split('/');
+  const safeDirectory = parts.length === 1 ||
+    (parts[0] === 'media' && parts.length === 2) ||
+    (parts[0] === 'vendor' && (parts.length === 2 ||
+      (parts[1] === 'ocr' && (parts.length === 3 || (['core', 'lang'].includes(parts[2]) && parts.length === 4)))));
+  const match = safeDirectory && /^[a-z0-9][a-z0-9._-]*\.([a-z0-9]+)$/i.exec(parts.at(-1));
   const type = match && types.get(match[1]);
 
   if (!type) {

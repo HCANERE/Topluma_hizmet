@@ -27,10 +27,10 @@
 
   const routeGroups = {
     'ana-sayfa': 'home', ozellikler: 'home', 'nasil-calisir': 'home', main: 'home',
-    kategoriler: 'games', pratik: 'practice', laboratuvar: 'practice',
+    kategoriler: 'games', 'tekrar-turu': 'review', pratik: 'practice', laboratuvar: 'practice',
     'karar-simulatoru': 'decision', 'baglanti-incele': 'inspector',
     'mesaj-incele': 'message', 'rehber-asistani': 'chat', 'ogrenme-yolu': 'path',
-    'egitim-videolari': 'videos', olcme: 'assessment',
+    'egitim-videolari': 'videos', 'medya-laboratuvari': 'media', olcme: 'assessment', 'saha-raporu': 'reports',
     'taktik-rehberi': 'guide', 'zarar-kontrolu': 'recovery'
   };
   function updateNavigation() {

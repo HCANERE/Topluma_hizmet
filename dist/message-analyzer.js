@@ -12,12 +12,22 @@
     { id: 'identity', title: 'Yetkili kişi iddiası', pattern: /(?:ben (?:polis|savcı|banka çalışanı|okul yönetimi)|(?:polis|savcı|banka görevlisi|okul yönetimi) olarak arıyorum)/iu, reason: 'Unvan veya kurum adı kimliği kanıtlamaz; önceden bildiğin numaradan kendin ulaş.' },
     { id: 'link', title: 'Bağlantı veya alan adı', pattern: /(?:https?:\/\/|\b[a-z0-9-]+\.(?:com|net|org|tr|edu|gov)(?:\b|\/))/iu, reason: 'Mesajdaki adresi açmadan önce gerçek alan adını incele; kuruma ayrıca kendi bulduğun kanaldan ulaş.' }
   ];
+  const foldedPatterns = {
+    payment: /(?:odeme|ucret|havale|iban|para gonder|para yatir|kart bilg|hesaba gonder|islem bedeli|on odeme)/iu,
+    secret: /(?:sifre|parola|dogrulama kod|giris kod|tek kullanimlik kod|sms kodu|onay kodu)/iu,
+    reward: /(?:kazandiniz|kazandin|hediye|ucretsiz|promosyon|cekilis|burs kazand)/iu,
+    pressure: /(?:kimseye soyleme|gizli tut|hesabin kapanacak|hesabiniz kapanacak|ceza uygulanacak|hakkinizda islem)/iu,
+    remote: /(?:uzaktan erisim|ekran paylas|program indir|uygulama yukle)/iu,
+    identity: /(?:ben (?:polis|savci|banka calisani|okul yonetimi)|(?:polis|savci|banka gorevlisi|okul yonetimi) olarak ariyorum)/iu
+  };
+  const fold = (text) => text.toLocaleLowerCase('tr-TR').replace(/ı/g, 'i').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
   function analyzeMessage(value) {
     const text = String(value ?? '').trim();
     if (!text) return { error: 'İncelemek için bir mesaj yaz veya kurgusal örnek seç.' };
     if (text.length > 2000) return { error: 'Mesaj 2000 karakterden kısa olmalı.' };
-    const findings = rules.filter((rule) => rule.pattern.test(text)).map(({ id, title, reason }) => ({ id, title, reason }));
+    const foldedText = fold(text);
+    const findings = rules.filter((rule) => rule.pattern.test(text) || foldedPatterns[rule.id]?.test(foldedText)).map(({ id, title, reason }) => ({ id, title, reason }));
     return {
       findings,
       summary: findings.length

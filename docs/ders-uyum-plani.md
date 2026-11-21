@@ -5,7 +5,7 @@ Bu plan, Selçuk Üniversitesi Topluma Hizmet Uygulamaları dersi için hazırla
 ## Kapsam ve adlandırma
 
 - Resmî teklifin adı **Güvenli Dijital Toplum: Toplum Geneli Siber Güvenlik Farkındalık Projesi**.
-- **Tıklamadan Önce Düşün**, bu projenin üç hedef kitleye uyarlanmış web eğitim platformu. Oyun, karar simülatörü, mesaj ve bağlantı/QR inceleme, yerel rehber chatbot, öğrenme yolu, eğitim videoları ve anonim ön/son testi içerir. Teklifteki sunum, kontrol listesi ve saha bilgilendirmesini destekler; onların yerine geçmez.
+- **Tıklamadan Önce Düşün**, bu projenin üç hedef kitleye uyarlanmış web eğitim platformu. Oyun, aralıklı tekrar, karar simülatörü, yerel OCR ile mesaj ve bağlantı/QR inceleme, yerel rehber chatbot, medya doğrulama laboratuvarı, öğrenme yolu, eğitim videoları ve anonim ön/son testi içerir. Eğitmen senaryo atölyesi ve toplu CSV birleştirme de ekip kullanımına destek verir. Teklifteki sunum, kontrol listesi ve saha bilgilendirmesini destekler; onların yerine geçmez.
 - Oyundaki soruların üç seçeneği var. Dersin ara/final sınavına teslim edilecek ekip soruları ayrı bir dosyadır ve Soru Hazırlama Kılavuzu'na göre **beş seçenekli (A–E), `ANSWER: X` satırlı, UTF-8 `.txt`** biçiminde hazırlanır. Soru sayısı ve teslim tarihi öğretim elemanının duyurusundan alınır. Kılavuzun atıf yaptığı `Soru_Sablonu.txt` verilen klasörde bulunmuyor.
 
 ## Önce doğrulanacak resmî durum
@@ -13,6 +13,7 @@ Bu plan, Selçuk Üniversitesi Topluma Hizmet Uygulamaları dersi için hazırla
 - Elde bulunan teklif kopyasında danışman onay alanı boş; onay alındığı varsayılmamalı. Saha uygulamasından önce güncel onay durumu ekip ve danışmanla doğrulanır.
 - Teklif kopyasında kurum izni alınmadığı işaretli ve hedef kurum kesinleşmemiş. Kurumla uygulama yapılacaksa randevu ve yazılı izin tamamlanır.
 - Teklifte fotoğraf/video kaydı planlanmadığı işaretli. Sonradan hazırlanan video çalışmaları ve web oyunu, kapsam değişikliği olarak danışmanla görüşülüp teklifin güncel hâline işlenir.
+- Sitede hesap açma zorunluluğu yoktur. Misafir ilerlemesi yalnızca cihazda tutulur veya kullanıcının seçtiği JSON yedeğiyle taşınır; gerçek oturum açma ve sunucu üzerinde veri saklama ayrı bir kapsam kararıdır.
 - Video veya görselde gerçek bir kişinin **adı, sesi ya da görüntüsü** yer alıyorsa ilgili yayın mecrası için uygun yazılı izin gerekir. Çocukların yüzü veya tanınabilir görüntüsü yayınlanmaz. Kurum adı, logosu, mekânı ve alıntısı için kurum izni ayrıca kontrol edilir. İmzalı belgeler açık GitHub deposuna konmaz.
 
 ## Uygulama ve ölçüm

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Senaryo Atölyesi · Tıklamadan Önce Düşün</title>
+  <link rel="stylesheet" href="editor.css"><script src="editor.js" defer></script>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">YEREL EĞİTMEN ARACI</p><h1>Senaryo atölyesi</h1>
+    <p>Bu dosya yalnızca ekip bilgisayarında açılır. Hesap veya yönetici yetkisi sağlamaz. Girdiler kaydedilmez; oluşturduğun JSON dosyasını depoya eklemeden önce ekipçe gözden geçir.</p>
+    <form id="scenario-form" novalidate>
+      <div class="grid"><label>Kategori<select name="category" required><option value="youth">Gençler</option><option value="parents">Ebeveynler</option><option value="seniors">İleri yaş</option></select></label>
+      <label>İleti türü<select name="kind" required><option value="sms">SMS</option><option value="email">E-posta</option><option value="social">Sosyal medya</option><option value="call">Telefon görüşmesi</option></select></label></div>
+      <label>Senaryo başlığı<input name="topic" maxlength="90" required placeholder="Örnek: Kargo teslim ücreti"></label>
+      <label>Gönderen (hayalî ad)<input name="from" maxlength="90" required placeholder="Örnek: Yıldız Teslimat"></label>
+      <label>E-posta konu satırı (yalnızca e-posta için)<input name="subject" maxlength="100"></label>
+      <label>İleti metni<textarea name="message" rows="5" maxlength="900" required></textarea></label>
+      <fieldset><legend>Üç davranış seçeneği</legend><label>Seçenek 1<input name="choice0" maxlength="180" required></label><label>Seçenek 2<input name="choice1" maxlength="180" required></label><label>Seçenek 3<input name="choice2" maxlength="180" required></label><label>Doğru seçenek<select name="correct"><option value="0">1. seçenek</option><option value="1">2. seçenek</option><option value="2">3. seçenek</option></select></label></fieldset>
+      <label>Doğru davranışın açıklaması<textarea name="explanation" rows="3" maxlength="500" required></textarea></label>
+      <div class="grid"><label>Şüpheli veya doğrulayıcı işaret 1<input name="clue0" maxlength="140" required></label><label>İşaret 2<input name="clue1" maxlength="140" required></label></div>
+      <label>Günlük güvenlik önerisi<input name="tip" maxlength="220" required></label>
+      <label>Tekrar konusu<input name="review" maxlength="160" required></label>
+      <div class="actions"><button type="submit">Senaryoyu listeye ekle</button><button type="button" id="download" disabled>JSON indir</button></div><p id="status" role="status"></p>
+    </form>
+    <section aria-labelledby="draft-title"><h2 id="draft-title">Hazırlanan senaryolar</h2><ul id="draft-list"></ul></section>
+    <section><h2>Siteye ekleme</h2><ol><li>JSON dosyasını indir.</li><li>Depo klasöründe <code>node scripts/add-scenarios.mjs DOSYA.json</code> çalıştır.</li><li><code>npm test</code> ile içerik kontrolünü yap; sonra kodu gözden geçir.</li></ol><p>Gerçek kişi, kurum, telefon ve alan adı kullanma. Örnek adreslerde yalnızca <code>example.com</code> kullan.</p></section>
+  </main>
+</body>
+</html>

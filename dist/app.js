@@ -7,6 +7,9 @@
     practice: document.querySelector('#practice-screen'),
     message: document.querySelector('#message-screen'),
     chat: document.querySelector('#chat-screen'),
+    review: document.querySelector('#review-screen'),
+    reports: document.querySelector('#reports-screen'),
+    media: document.querySelector('#media-screen'),
     path: document.querySelector('#path-screen'),
     decision: document.querySelector('#decision-screen'),
     videos: document.querySelector('#videos-screen'),
@@ -14,7 +17,7 @@
     game: document.querySelector('#game-screen'),
     result: document.querySelector('#result-screen')
   };
-  const screenHeadings = { home: '#home-title', practice: '#practice-title', message: '#message-title', chat: '#chat-title', path: '#path-title', decision: '#decision-title', videos: '#videos-title', assessment: '#assessment-title', game: '#question-title', result: '#result-title' };
+  const screenHeadings = { home: '#home-title', practice: '#practice-title', message: '#message-title', chat: '#chat-title', review: '#review-screen-title', reports: '#reports-title', media: '#media-title', path: '#path-title', decision: '#decision-title', videos: '#videos-title', assessment: '#assessment-title', game: '#question-title', result: '#result-title' };
   const siteShell = document.querySelector('#site-shell');
   const skipLink = document.querySelector('#skip-link');
   const practiceViews = new Map(Array.from(document.querySelectorAll('[data-practice-view]'), (view) => [view.id, view]));
@@ -22,7 +25,41 @@
   const tacticCards = new Map(Array.from(document.querySelectorAll('.tactic-card'), (card) => [card.id, card]));
   const labels = { sms: 'SMS konuşması', email: 'E-posta', social: 'Sosyal medya mesajı', call: 'Telefon görüşmesi' };
   const questionsPerRound = 5;
-  const state = { category: null, index: 0, correct: 0, answered: false, missed: [], questions: [] };
+  const state = { category: null, mode: 'normal', index: 0, correct: 0, answered: false, missed: [], questions: [] };
+  const reviewKey = 'tod-review-v1';
+  const allQuestions = Object.values(bank).flatMap((category) => category.questions);
+  const questionsById = new Map(allQuestions.map((question) => [question.id, question]));
+  let reviewSchedule = {};
+  try {
+    const saved = JSON.parse(localStorage.getItem(reviewKey) || '{}');
+    if (saved && typeof saved === 'object' && !Array.isArray(saved)) {
+      for (const [id, item] of Object.entries(saved)) {
+        if (questionsById.has(id) && Number.isSafeInteger(item?.due) && item.due >= 0 && Number.isInteger(item?.stage) && item.stage >= 0 && item.stage <= 3) reviewSchedule[id] = item;
+      }
+    }
+  } catch (_) { /* The review tour also works without local storage. */ }
+  const reviewIntervals = [1, 3, 7];
+  function dueQuestions(now = Date.now()) {
+    return Object.entries(reviewSchedule).filter(([, item]) => item.due <= now)
+      .sort((a, b) => a[1].due - b[1].due).map(([id]) => questionsById.get(id)).filter(Boolean);
+  }
+  function updateReviewSummary() {
+    const count = dueQuestions().length;
+    const label = count ? `${count} konu tekrar için hazır.` : 'Şu anda tekrar bekleyen konu yok. Oyun oynadıkça yanlış yanıtlanan konular burada görünür.';
+    document.querySelector('#review-due-count').textContent = label;
+    document.querySelector('#review-start').disabled = !count;
+  }
+  function scheduleReview(question, correct) {
+    const current = reviewSchedule[question.id];
+    if (!correct) reviewSchedule[question.id] = { due: Date.now(), stage: 0 };
+    else if (state.mode === 'review' && current) {
+      if (current.stage >= reviewIntervals.length) delete reviewSchedule[question.id];
+      else reviewSchedule[question.id] = { due: Date.now() + reviewIntervals[current.stage] * 86400000, stage: current.stage + 1 };
+    }
+    try { localStorage.setItem(reviewKey, JSON.stringify(reviewSchedule)); } catch (_) {}
+    updateReviewSummary();
+  }
+  window.TOD_REVIEW = { dueQuestions, getSchedule: () => ({ ...reviewSchedule }) };
 
   // Local preferences contain only display settings and category scores.
   const storageKey = 'tod-progress-v1';
@@ -54,15 +91,19 @@
   });
   document.querySelector('#clear-local-data').addEventListener('click', () => {
     progress = {};
+    reviewSchedule = {};
     try {
       localStorage.removeItem(storageKey);
+      localStorage.removeItem(reviewKey);
       localStorage.removeItem('tod-large-text');
     } catch (_) { /* The in-memory state is cleared even without storage access. */ }
     setLargeText(false);
     updateProgress();
+    updateReviewSummary();
     document.querySelector('#clear-local-status').textContent = 'Bu cihazdaki oyun kayıtları temizlendi.';
   });
   updateProgress();
+  updateReviewSummary();
 
   function el(tag, className, text) {
     const node = document.createElement(tag);
@@ -78,7 +119,7 @@
     document.body.classList.toggle('playing', playing);
     if (!playing) document.body.classList.remove('senior-mode');
     skipLink.setAttribute('href', {
-      practice: '#practice-screen', message: '#message-screen', chat: '#chat-screen', path: '#path-screen', decision: '#decision-screen', videos: '#videos-screen', assessment: '#assessment-screen'
+      practice: '#practice-screen', message: '#message-screen', chat: '#chat-screen', review: '#review-screen', reports: '#reports-screen', media: '#media-screen', path: '#path-screen', decision: '#decision-screen', videos: '#videos-screen', assessment: '#assessment-screen'
     }[name] || '#main');
     window.scrollTo(0, 0);
     focusTarget.focus({ preventScroll: true });
@@ -86,7 +127,7 @@
 
   function syncLocation() {
     const id = window.location.hash.slice(1);
-    const moduleRoutes = { 'mesaj-incele': 'message', 'rehber-asistani': 'chat', 'ogrenme-yolu': 'path', 'karar-simulatoru': 'decision', 'egitim-videolari': 'videos', olcme: 'assessment' };
+    const moduleRoutes = { 'mesaj-incele': 'message', 'rehber-asistani': 'chat', 'tekrar-turu': 'review', 'saha-raporu': 'reports', 'medya-laboratuvari': 'media', 'ogrenme-yolu': 'path', 'karar-simulatoru': 'decision', 'egitim-videolari': 'videos', olcme: 'assessment' };
     if (moduleRoutes[id]) {
       showScreen(moduleRoutes[id]);
       return;
@@ -162,7 +203,7 @@
     const questions = state.questions;
     const question = questions[state.index];
     state.answered = false;
-    document.querySelector('#game-category').textContent = bank[state.category].title;
+    document.querySelector('#game-category').textContent = state.mode === 'review' ? 'Kısa tekrar' : bank[state.category].title;
     document.querySelector('#progress-text').textContent = `Soru ${state.index + 1} / ${questions.length}`;
     document.querySelector('#live-score').textContent = String(score());
     document.querySelector('#progress-fill').style.width = `${((state.index + 1) / questions.length) * 100}%`;
@@ -189,6 +230,7 @@
     const isCorrect = choiceIndex === question.correct;
     if (isCorrect) state.correct += 1;
     else state.missed.push({ topic: question.topic, review: question.review });
+    scheduleReview(question, isCorrect);
     document.querySelector('#live-score').textContent = String(score());
 
     document.querySelectorAll('.choice-button').forEach((button, index) => {
@@ -216,11 +258,13 @@
   }
 
   function showResults() {
-    const previous = progress[state.category];
-    progress[state.category] = Math.max(Number.isInteger(previous) && previous >= 0 && previous <= 100 ? previous : 0, score());
-    try { localStorage.setItem(storageKey, JSON.stringify(progress)); } catch (_) {}
-    updateProgress();
-    document.querySelector('#result-category').textContent = `${bank[state.category].title} kategorisi`;
+    if (state.mode !== 'review') {
+      const previous = progress[state.category];
+      progress[state.category] = Math.max(Number.isInteger(previous) && previous >= 0 && previous <= 100 ? previous : 0, score());
+      try { localStorage.setItem(storageKey, JSON.stringify(progress)); } catch (_) {}
+      updateProgress();
+    }
+    document.querySelector('#result-category').textContent = state.mode === 'review' ? 'Kısa tekrar turu' : `${bank[state.category].title} kategorisi`;
     document.querySelector('#final-score').textContent = `${score()} / 100`;
     document.querySelector('#correct-count').textContent = `${state.correct} / ${state.questions.length} doğru cevap`;
     const review = document.querySelector('#review-content');
@@ -238,11 +282,14 @@
       });
       review.append(list);
     }
+    document.querySelector('#replay-button').hidden = state.mode === 'review' && dueQuestions().length === 0;
+    document.querySelector('#return-button').textContent = state.mode === 'review' ? 'Tekrar bölümüne dön' : 'Kategori Seçimine Dön';
     showScreen('result');
   }
 
   function start(category) {
     if (!bank || !bank[category] || bank[category].questions.length === 0) return;
+    state.mode = 'normal';
     state.category = category;
     state.questions = shuffle(bank[category].questions).slice(0, questionsPerRound);
     state.index = 0;
@@ -250,15 +297,27 @@
     state.answered = false;
     state.missed = [];
     document.body.classList.toggle('senior-mode', category === 'seniors');
+    document.querySelector('#leave-game').textContent = 'Kategori Seçimine Dön';
     renderQuestion();
     showScreen('game');
   }
 
+  function startReview() {
+    const due = dueQuestions().slice(0, questionsPerRound);
+    if (!due.length) { document.querySelector('#review-status').textContent = 'Şu anda tekrar için hazır soru yok.'; return; }
+    state.mode = 'review'; state.category = null; state.questions = due;
+    state.index = 0; state.correct = 0; state.answered = false; state.missed = [];
+    document.body.classList.add('senior-mode');
+    document.querySelector('#leave-game').textContent = 'Tekrar bölümüne dön';
+    renderQuestion(); showScreen('game');
+  }
+
   function returnHome() {
+    const destination = state.mode === 'review' ? 'tekrar-turu' : 'kategoriler';
     state.category = null;
     state.answered = false;
-    if (window.location.hash === '#kategoriler') syncLocation();
-    else window.location.hash = 'kategoriler';
+    if (window.location.hash === `#${destination}`) syncLocation();
+    else window.location.hash = destination;
   }
 
   document.querySelectorAll('[data-category]').forEach((button) => {
@@ -273,7 +332,8 @@
   });
   document.querySelector('#leave-game').addEventListener('click', returnHome);
   document.querySelector('#return-button').addEventListener('click', returnHome);
-  document.querySelector('#replay-button').addEventListener('click', () => start(state.category));
+  document.querySelector('#replay-button').addEventListener('click', () => state.mode === 'review' ? startReview() : start(state.category));
+  document.querySelector('#review-start').addEventListener('click', startReview);
   skipLink.addEventListener('click', (event) => {
     event.preventDefault();
     document.querySelector(skipLink.getAttribute('href')).focus();

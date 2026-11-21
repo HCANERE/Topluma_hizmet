@@ -5,6 +5,7 @@ import vm from 'node:vm';
 const js = fs.readFileSync(new URL('./dist/data.js', import.meta.url), 'utf8');
 const context = { window: {} };
 vm.runInNewContext(js, context);
+vm.runInNewContext(fs.readFileSync(new URL('./dist/extra-scenarios.js', import.meta.url), 'utf8'), context);
 const bank = context.window.TOD_DATA;
 assert.deepEqual(Object.keys(bank), ['youth', 'parents', 'seniors']);
 const ids = new Set();
@@ -30,5 +31,5 @@ for (const [category, group] of Object.entries(bank)) {
     assert.ok(index < group.questions.length);
   }
 }
-assert.equal(ids.size, 18);
-console.log('18 scenarios, 3 categories, choices, explanations, and example domains verified.');
+assert.ok(ids.size >= 18);
+console.log(`${ids.size} scenarios, 3 categories, choices, explanations, and example domains verified.`);
