@@ -94,10 +94,19 @@
     if (registered && registered !== url.hostname) {
       findings.push(`Bağlantı, ${registered} alan adının altındaki bir adrese gidiyor. Soldaki tanıdık kelimeler ayrı bir kurumun sitesi olduğunu kanıtlamaz.`);
     }
+    const mainLabel = registered?.split('.')[0] || '';
+    if (mainLabel.includes('-') || /[a-z]\d|\d[a-z]/i.test(mainLabel)) {
+      findings.push('Ana alan adında tire veya harfle karışık rakam var. Bu tek başına zararlı olduğu anlamına gelmez; tanıdık bir adı taklit edip etmediğini bağımsız doğrula.');
+    }
+    if (mainLabel.length > 28) {
+      findings.push('Ana alan adı uzun ve okunması güç. Adı dikkatle karşılaştır ve kuruma kendi bulduğun kanaldan ulaş.');
+    }
 
     return {
       host: url.host,
+      hostname: url.hostname,
       registered,
+      subdomain: registered && url.hostname.endsWith(`.${registered}`) ? url.hostname.slice(0, -registered.length - 1) : '',
       summary: 'Bu işaretler tek başına bir bağlantının zararlı veya güvenli olduğunu belirlemez. Adresin kime ait olduğunu bağımsız kaynaktan doğrulayın.',
       findings
     };
@@ -113,6 +122,53 @@
   const findings = document.getElementById('inspector-findings');
   const qrInput = document.getElementById('inspector-qr');
   const qrStatus = document.getElementById('inspector-qr-status');
+  const domainParts = document.getElementById('inspector-domain-parts');
+  const liveButton = document.getElementById('live-check');
+  const liveConsent = document.getElementById('live-consent');
+  const liveStatus = document.getElementById('live-status');
+  const liveAttribution = document.getElementById('live-google-attribution');
+  let liveAvailable = false;
+  let lastAnalyzed = null;
+
+  function updateLiveButton() {
+    if (liveButton) liveButton.disabled = !liveAvailable || !liveConsent.checked || lastAnalyzed !== input.value.trim();
+  }
+  if (liveButton && typeof fetch === 'function') {
+    fetch('api/reputation/status', { cache: 'no-store' })
+      .then((response) => response.ok ? response.json() : null)
+      .then((data) => {
+        liveAvailable = data?.available === true;
+        liveStatus.textContent = liveAvailable
+          ? 'Canlı sorgu hazır. Önce adresi yerel olarak incele; ardından istersen ayrı onayla sorgula.'
+          : 'Canlı sorgu yapılandırılmadı; yerel inceleme kullanılabilir.';
+        updateLiveButton();
+      }).catch(() => { /* Static hosting intentionally has no live service. */ });
+    liveConsent.addEventListener('change', updateLiveButton);
+    input.addEventListener('input', () => { lastAnalyzed = null; updateLiveButton(); });
+    liveButton.addEventListener('click', async () => {
+      if (!liveAvailable || !liveConsent.checked || lastAnalyzed !== input.value.trim()) return;
+      liveButton.disabled = true;
+      liveAttribution.hidden = true;
+      liveStatus.textContent = 'Bilinen tehdit listesi sorgulanıyor…';
+      try {
+        const response = await fetch('api/reputation/check', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ address: lastAnalyzed })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Sorgu tamamlanamadı.');
+        if (data.status === 'flagged') {
+          liveStatus.textContent = 'Google Safe Browsing listelerinde olası bir tehdit eşleşmesi bulundu. Bağlantıyı açma; kurumu bağımsız kanaldan doğrula.';
+          liveAttribution.hidden = false;
+        } else {
+          liveStatus.textContent = 'Google Safe Browsing listelerinde eşleşme bulunmadı. Bu, adresin güvenli olduğu anlamına gelmez.';
+        }
+      } catch (_) {
+        liveStatus.textContent = 'Canlı sorgu şu anda tamamlanamadı. Yerel bulgulara bak ve adresi bağımsız doğrula.';
+      }
+      updateLiveButton();
+    });
+  }
 
   async function showAnalysis(value) {
     await loadSuffixRules();
@@ -122,12 +178,36 @@
     host.hidden = !analysis.host;
     document.querySelector('.inspector-host-label').hidden = !analysis.host;
     byIdRegistered.textContent = analysis.registered ? `Kayıtlı alan adı: ${analysis.registered}` : analysis.host ? 'Kayıtlı alan adı belirlenemedi; tam adresi ayrıca kontrol edin.' : '';
+    if (domainParts) {
+      domainParts.replaceChildren();
+      for (const [label, value, special] of [
+        ['Alt alan adı', analysis.subdomain, false],
+        ['Asıl alan adı', analysis.registered, true],
+        ['Bağlantı noktası', analysis.host && analysis.host !== analysis.hostname ? analysis.host.slice(analysis.hostname.length + 1) : '', false]
+      ]) {
+        if (!value) continue;
+        const part = document.createElement('span');
+        const caption = document.createElement('small');
+        caption.textContent = label;
+        part.textContent = value;
+        part.prepend(caption);
+        if (special) part.className = 'domain-main';
+        domainParts.append(part);
+      }
+    }
     findings.replaceChildren(...(analysis.findings || []).map((message) => {
       const item = document.createElement('li');
       item.textContent = message;
       return item;
     }));
     result.hidden = false;
+    lastAnalyzed = analysis.error ? null : input.value.trim();
+    if (liveConsent) liveConsent.checked = false;
+    if (liveAttribution) liveAttribution.hidden = true;
+    if (liveStatus) liveStatus.textContent = liveAvailable
+      ? 'Yerel inceleme tamamlandı. Canlı sorgu için aşağıdaki seçeneği ayrıca onayla.'
+      : 'Canlı sorgu yapılandırılmadı; yerel inceleme kullanılabilir.';
+    updateLiveButton();
     document.getElementById('inspector-result-title').focus();
   }
 

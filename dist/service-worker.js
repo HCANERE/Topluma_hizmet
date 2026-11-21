@@ -1,8 +1,8 @@
-const CACHE = 'tod-training-v4';
+const CACHE = 'tod-training-v5';
 const CORE = [
   './', 'index.html', 'style.css', 'practice.css', 'portal.css', 'favicon.svg', 'manifest.webmanifest',
   'data.js', 'app.js', 'lab-scenarios.js', 'practice.js', 'url-inspector.js',
-  'decision-data.js', 'decision.js', 'assessment.js', 'portal.js',
+  'decision-data.js', 'decision.js', 'assessment.js', 'message-analyzer.js', 'learning-path.js', 'portal.js',
   'vendor/jsQR.js', 'vendor/public_suffix_list.dat',
   'media/poster-wide.svg', 'media/poster-portrait.svg'
 ];

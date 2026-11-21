@@ -29,6 +29,7 @@
     'ana-sayfa': 'home', ozellikler: 'home', 'nasil-calisir': 'home', main: 'home',
     kategoriler: 'games', pratik: 'practice', laboratuvar: 'practice',
     'karar-simulatoru': 'decision', 'baglanti-incele': 'inspector',
+    'mesaj-incele': 'message', 'ogrenme-yolu': 'path',
     'egitim-videolari': 'videos', olcme: 'assessment',
     'taktik-rehberi': 'guide', 'zarar-kontrolu': 'recovery'
   };
