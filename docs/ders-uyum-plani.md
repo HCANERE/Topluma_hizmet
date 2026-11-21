@@ -5,7 +5,7 @@ Bu plan, Selçuk Üniversitesi Topluma Hizmet Uygulamaları dersi için hazırla
 ## Kapsam ve adlandırma
 
 - Resmî teklifin adı **Güvenli Dijital Toplum: Toplum Geneli Siber Güvenlik Farkındalık Projesi**.
-- **Tıklamadan Önce Düşün**, bu projenin üç hedef kitleye uyarlanmış web eğitim platformu. Oyun, karar simülatörü, mesaj ve bağlantı/QR inceleme, öğrenme yolu, eğitim videoları ve anonim ön/son testi içerir. Teklifteki sunum, kontrol listesi ve saha bilgilendirmesini destekler; onların yerine geçmez.
+- **Tıklamadan Önce Düşün**, bu projenin üç hedef kitleye uyarlanmış web eğitim platformu. Oyun, karar simülatörü, mesaj ve bağlantı/QR inceleme, yerel rehber chatbot, öğrenme yolu, eğitim videoları ve anonim ön/son testi içerir. Teklifteki sunum, kontrol listesi ve saha bilgilendirmesini destekler; onların yerine geçmez.
 - Oyundaki soruların üç seçeneği var. Dersin ara/final sınavına teslim edilecek ekip soruları ayrı bir dosyadır ve Soru Hazırlama Kılavuzu'na göre **beş seçenekli (A–E), `ANSWER: X` satırlı, UTF-8 `.txt`** biçiminde hazırlanır. Soru sayısı ve teslim tarihi öğretim elemanının duyurusundan alınır. Kılavuzun atıf yaptığı `Soru_Sablonu.txt` verilen klasörde bulunmuyor.
 
 ## Önce doğrulanacak resmî durum

@@ -21,6 +21,8 @@
   <script src="assessment.js" defer></script>
   <script src="message-analyzer.js" defer></script>
   <script src="learning-path.js" defer></script>
+  <script src="chatbot-data.js" defer></script>
+  <script src="chatbot.js" defer></script>
   <script src="portal.js" defer></script>
 </head>
 <body>
@@ -43,12 +45,13 @@
       <p class="sidebar-label">REHBER</p>
       <nav class="sidebar-nav" aria-label="Yardımcı içerikler">
         <a href="#taktik-rehberi" data-site-nav="guide"><span aria-hidden="true">☰</span> Taktik rehberi</a>
+        <a href="#rehber-asistani" data-site-nav="chat"><span aria-hidden="true">◉</span> Rehber chatbot</a>
         <a href="#zarar-kontrolu" data-site-nav="recovery"><span aria-hidden="true">✚</span> Şimdi ne yapacağım?</a>
       </nav>
       <div class="sidebar-foot"><strong>Dur. Düşün. Doğrula.</strong><span>Ücretsiz · Üyeliksiz · Türkçe</span><small id="offline-status" role="status"></small></div>
     </aside>
     <button class="sidebar-scrim" id="sidebar-scrim" type="button" aria-label="Menüyü kapat" hidden></button>
-    <header class="site-header wrap"><button class="menu-button" id="menu-button" type="button" aria-controls="site-sidebar" aria-expanded="false" aria-label="Menüyü aç">☰</button><a class="brand" href="#ana-sayfa" aria-label="Tıklamadan Önce Düşün ana sayfa"><span class="brand-mark" aria-hidden="true">✦</span><span>Tıklamadan<br>Önce Düşün</span></a><nav class="header-nav" aria-label="Hızlı erişim"><a class="header-link" href="#egitim-videolari">Videolar</a><a class="header-link" href="#olcme">Öğrenmeni ölç</a><button class="text-size-button" id="text-size" type="button" aria-pressed="false" aria-label="Büyük metni aç">Aa<span>Büyük metin</span></button></nav></header>
+    <header class="site-header wrap"><button class="menu-button" id="menu-button" type="button" aria-controls="site-sidebar" aria-expanded="false" aria-label="Menüyü aç">☰</button><a class="brand" href="#ana-sayfa" aria-label="Tıklamadan Önce Düşün ana sayfa"><span class="brand-mark" aria-hidden="true">✦</span><span>Tıklamadan<br>Önce Düşün</span></a><nav class="header-nav" aria-label="Hızlı erişim"><a class="header-link" href="#rehber-asistani">Rehbere sor</a><a class="header-link" href="#egitim-videolari">Videolar</a><a class="header-link" href="#olcme">Öğrenmeni ölç</a><button class="text-size-button" id="text-size" type="button" aria-pressed="false" aria-label="Büyük metni aç">Aa<span>Büyük metin</span></button></nav></header>
     <div id="home-screen">
       <main id="main" tabindex="-1">
         <section class="hero wrap" aria-labelledby="home-title">
@@ -72,6 +75,7 @@
             <a class="feature-card" href="#olcme"><span class="feature-icon" aria-hidden="true">◩</span><span class="feature-type">ÖLÇ</span><strong>Ön test / Son test</strong><span>Eğitim öncesi ve sonrası bilgini karşılaştır; toplu saha sonucunu çıkar.</span><span class="feature-action">Ölçmeye başla</span></a>
             <a class="feature-card" href="#zarar-kontrolu"><span class="feature-icon" aria-hidden="true">✚</span><span class="feature-type">ADIM AT</span><strong>Şimdi ne yapacağım?</strong><span>Şüpheli bir bağlantı açtıysan veya kod paylaştıysan güvenli adımları gör.</span><span class="feature-action">Rehberi aç</span></a>
             <a class="feature-card" href="#ogrenme-yolu"><span class="feature-icon" aria-hidden="true">↗</span><span class="feature-type">SIRAYLA ÖĞREN</span><strong>Öğrenme yolu</strong><span>Ön testten kısa videoya ve uygulamaya uzanan adımları kendi hızında izle.</span><span class="feature-action">Yola başla</span></a>
+            <a class="feature-card" href="#rehber-asistani"><span class="feature-icon" aria-hidden="true">◉</span><span class="feature-type">SOR</span><strong>Dijital Güvenlik Rehberi</strong><span>Sorunu Türkçe yaz; ilgili eğitim veya yardım bölümünü kaynak göstererek bul.</span><span class="feature-action">Rehbere sor</span></a>
           </div>
         </section>
         <section class="practice-section" id="pratik" aria-labelledby="practice-home-title">
@@ -238,6 +242,12 @@
       <div class="wrap module-wrap"><div class="module-heading"><p class="eyebrow">ŞÜPHELİ İÇERİĞİ ANLA</p><h1 id="message-title" tabindex="-1">Mesajı birlikte inceleyelim</h1><p>Bir SMS, e-posta veya sosyal medya mesajında dikkat gerektiren istekleri öğren. Bu araç metni yalnızca cihazında işler; kesin dolandırıcılık kararı vermez.</p></div>
         <div class="message-layout"><section class="assessment-card" aria-labelledby="message-input-title"><h2 id="message-input-title">Mesaj metni</h2><p>Ad, telefon, hesap numarası, şifre ve tek kullanımlık kodları önce sil. Mesajı buraya yapıştır; bağlantılara tıklama.</p><form id="message-form"><label for="message-input">İncelenecek metin</label><textarea id="message-input" rows="8" maxlength="2000" spellcheck="false" placeholder="Örnek: Paketiniz bekliyor. Bugün ödeme yapmanız gerekiyor…" aria-describedby="message-privacy"></textarea><p id="message-privacy">Metin kaydedilmez, sunucuya gönderilmez ve başka bir adrese istek yapılmaz.</p><div class="message-actions"><button type="submit" class="start-button">İşaretleri incele</button><button type="button" id="message-clear" class="outline-button">Metni temizle</button></div></form><div class="message-examples"><p>Önce kurgusal örneklerle deneyebilirsin:</p><button type="button" data-message-example="kargo">Sahte kargo</button><button type="button" data-message-example="kod">Giriş kodu isteği</button><button type="button" data-message-example="normal">Olağan duyuru</button></div></section>
         <section id="message-result" class="assessment-card message-result" aria-labelledby="message-result-title" hidden><h2 id="message-result-title" tabindex="-1">İnceleme sonucu</h2><p id="message-summary" role="status"></p><ul id="message-findings" class="message-findings"></ul><div class="message-next"><h3>Şimdi ne yapabilirsin?</h3><p id="message-advice"></p><a href="#karar-simulatoru">Karar simülatöründe prova et</a></div></section></div>
+      </div>
+    </main>
+    <main id="chat-screen" class="module-screen" aria-labelledby="chat-title" tabindex="-1" hidden>
+      <div class="wrap module-wrap"><div class="module-heading"><p class="eyebrow">DİJİTAL GÜVENLİK REHBERİ</p><h1 id="chat-title" tabindex="-1">Aklındaki soruyu sor</h1><p>Bu rehber, sitedeki hazırlanmış eğitim içerikleri arasında arama yapar. Üretken yapay zekâ değildir; bir bağlantının güvenli olduğunu veya bir mesajın kesin sahte olduğunu söylemez.</p></div>
+        <div class="chat-layout"><section class="chat-panel" aria-label="Rehber sohbeti"><div id="chat-log" class="chat-log" role="log" aria-live="polite" aria-label="Sohbet yanıtları"></div><form id="chat-form"><label for="chat-input">Sorun</label><textarea id="chat-input" rows="3" maxlength="400" placeholder="Örnek: Bana kargo mesajı geldi, nasıl doğrularım?" aria-describedby="chat-privacy"></textarea><p id="chat-privacy">Ad, telefon, şifre, giriş kodu veya gerçek bağlantı yazma. Sorular cihazında işlenir; sohbet kaydedilmez ve sayfadan ayrılınca temizlenir.</p><div class="chat-actions"><button type="submit" class="start-button">Soruyu gönder</button><button type="button" class="outline-button" id="chat-clear">Sohbeti temizle</button></div><p id="chat-status" role="status"></p></form></section>
+        <aside class="chat-side" aria-labelledby="chat-examples-title"><h2 id="chat-examples-title">Örnek sorular</h2><p>Başlamak için bir kurgusal durum seçebilirsin.</p><div class="chat-suggestions"><button type="button" data-chat-example="Bana kargo mesajı geldi, nasıl doğrularım?">Kargo mesajı geldi</button><button type="button" data-chat-example="Giriş kodumu paylaştım, şimdi ne yapmalıyım?">Kodumu paylaştım</button><button type="button" data-chat-example="Gördüğüm video gerçek mi, nasıl anlarım?">Video gerçek mi?</button><button type="button" data-chat-example="Bu bağlantı güvenli mi?">Bağlantıyı kontrol et</button></div><div class="chat-side-note"><strong>Önemli sınır</strong><p>Rehber bir virüs tarayıcısı veya acil yardım hattı değildir. Para veya hesap riski varsa işlemi durdur, bankana ya da ilgili kuruma kendi bildiğin resmî kanaldan ulaş.</p></div></aside></div>
       </div>
     </main>
     <main id="path-screen" class="module-screen" aria-labelledby="path-title" tabindex="-1" hidden>

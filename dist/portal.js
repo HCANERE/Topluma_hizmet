@@ -29,7 +29,7 @@
     'ana-sayfa': 'home', ozellikler: 'home', 'nasil-calisir': 'home', main: 'home',
     kategoriler: 'games', pratik: 'practice', laboratuvar: 'practice',
     'karar-simulatoru': 'decision', 'baglanti-incele': 'inspector',
-    'mesaj-incele': 'message', 'ogrenme-yolu': 'path',
+    'mesaj-incele': 'message', 'rehber-asistani': 'chat', 'ogrenme-yolu': 'path',
     'egitim-videolari': 'videos', olcme: 'assessment',
     'taktik-rehberi': 'guide', 'zarar-kontrolu': 'recovery'
   };
@@ -41,6 +41,7 @@
       else link.removeAttribute('aria-current');
     });
     if (section !== 'videos') videos.forEach((video) => video.pause());
+    if (section !== 'chat') window.TOD_CHAT_GUIDE?.clearConversation();
     setMenu(false);
   }
   navLinks.forEach((link) => link.addEventListener('click', () => setMenu(false)));

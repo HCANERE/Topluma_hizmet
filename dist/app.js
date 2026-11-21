@@ -6,6 +6,7 @@
     home: document.querySelector('#home-screen'),
     practice: document.querySelector('#practice-screen'),
     message: document.querySelector('#message-screen'),
+    chat: document.querySelector('#chat-screen'),
     path: document.querySelector('#path-screen'),
     decision: document.querySelector('#decision-screen'),
     videos: document.querySelector('#videos-screen'),
@@ -13,7 +14,7 @@
     game: document.querySelector('#game-screen'),
     result: document.querySelector('#result-screen')
   };
-  const screenHeadings = { home: '#home-title', practice: '#practice-title', message: '#message-title', path: '#path-title', decision: '#decision-title', videos: '#videos-title', assessment: '#assessment-title', game: '#question-title', result: '#result-title' };
+  const screenHeadings = { home: '#home-title', practice: '#practice-title', message: '#message-title', chat: '#chat-title', path: '#path-title', decision: '#decision-title', videos: '#videos-title', assessment: '#assessment-title', game: '#question-title', result: '#result-title' };
   const siteShell = document.querySelector('#site-shell');
   const skipLink = document.querySelector('#skip-link');
   const practiceViews = new Map(Array.from(document.querySelectorAll('[data-practice-view]'), (view) => [view.id, view]));
@@ -77,7 +78,7 @@
     document.body.classList.toggle('playing', playing);
     if (!playing) document.body.classList.remove('senior-mode');
     skipLink.setAttribute('href', {
-      practice: '#practice-screen', message: '#message-screen', path: '#path-screen', decision: '#decision-screen', videos: '#videos-screen', assessment: '#assessment-screen'
+      practice: '#practice-screen', message: '#message-screen', chat: '#chat-screen', path: '#path-screen', decision: '#decision-screen', videos: '#videos-screen', assessment: '#assessment-screen'
     }[name] || '#main');
     window.scrollTo(0, 0);
     focusTarget.focus({ preventScroll: true });
@@ -85,7 +86,7 @@
 
   function syncLocation() {
     const id = window.location.hash.slice(1);
-    const moduleRoutes = { 'mesaj-incele': 'message', 'ogrenme-yolu': 'path', 'karar-simulatoru': 'decision', 'egitim-videolari': 'videos', olcme: 'assessment' };
+    const moduleRoutes = { 'mesaj-incele': 'message', 'rehber-asistani': 'chat', 'ogrenme-yolu': 'path', 'karar-simulatoru': 'decision', 'egitim-videolari': 'videos', olcme: 'assessment' };
     if (moduleRoutes[id]) {
       showScreen(moduleRoutes[id]);
       return;

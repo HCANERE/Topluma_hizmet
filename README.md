@@ -10,6 +10,7 @@ Selçuk Üniversitesi Topluma Hizmet Uygulamaları dersi için geliştirilen, T�
 - **Tuzak Laboratuvarı ve Taktik Rehberi:** Aynı görünen mesajların farklı sonuçlarını karşılaştırma ve sık kullanılan dolandırıcılık yöntemlerini öğrenme.
 - **Bağlantı ve QR inceleme:** Girilen adresi açmadan ana alan adını, alt alan adını ve dikkat gerektiren yapısal işaretleri açıklama. QR görseli cihazda okunur. Varsayılan akışta canlı sorgu yapılmaz; isteğe bağlı yardımcı servis bilinen tehdit listesi sorgusu ekler. Hiçbir sonuç güvenlik garantisi vermez.
 - **Şüpheli mesaj inceleme:** SMS veya e-postadaki acele, ödeme, kod ve bağlantı gibi işaretleri açıklayan cihaz içi kural motoru. Metin saklanmaz veya gönderilmez; sonuç dolandırıcılık hükmü değildir.
+- **Dijital Güvenlik Rehberi:** Türkçe soruları küratörlü konu bankasıyla eşleştiren, ilgili site içeriğini kaynak gösteren yerel chatbot. Konu bulunamazsa bunu söyler. Üretken yapay zekâ veya canlı virüs tarayıcısı değildir.
 - **Öğrenme yolu:** Ön test, mesaj inceleme, video, karar simülatörü ve son test için isteğe bağlı ilerleme listesi.
 - **Eğitim videoları:** Tanıtım filmi ve altı kısa eğitim videosu. Türkçe altyazı, konu filtresi ve dikey videolar için uygun oynatıcı vardır.
 - **Ön test / Son test:** Aynı beş kazanımı eğitim öncesi ve sonrası kısa sorularla ölçme; cihazdaki anonim toplu sonucu ve geri bildirimi CSV olarak dışa aktarma. Oyun puanları bu ölçüme katılmaz.
@@ -33,7 +34,7 @@ Kullanıcı önce adresi cihazında inceler. Canlı sorgu için ayrıca onay ver
 
 ## Veri ve çevrimdışı kullanım
 
-İsim, e-posta, telefon veya yaş bilgisi istenmez. Oyunların en iyi puanı, metin boyutu tercihi, öğrenme yolu işaretleri ve tamamlanmış testlerin **yalnızca toplu sayıları** bu tarayıcının yerel depolamasında tutulur. Mesaj metni, bağlantı/QR içeriği ve bireysel test yanıtları saklanmaz. Varsayılan akışta bunlar sunucuya gönderilmez; isteğe bağlı canlı sorgu açılırsa yalnızca kullanıcının ayrıca onayladığı adres Google'a gönderilir. Toplu CSV dışa aktarma ve toplu sonucu temizleme, ölçme ekranındadır. Her cihazın toplu verisi ayrıdır; cihazlar arası otomatik birleştirme yoktur.
+İsim, e-posta, telefon veya yaş bilgisi istenmez. Oyunların en iyi puanı, metin boyutu tercihi, öğrenme yolu işaretleri ve tamamlanmış testlerin **yalnızca toplu sayıları** bu tarayıcının yerel depolamasında tutulur. Mesaj metni, chatbot soruları, bağlantı/QR içeriği ve bireysel test yanıtları kalıcı olarak saklanmaz. Chatbot konuşması bölümden ayrılınca temizlenir; adresler ve uzun sayılar soru balonunda gizlenir. Varsayılan akışta kullanıcı girdileri sunucuya gönderilmez; isteğe bağlı canlı sorgu açılırsa yalnızca kullanıcının ayrıca onayladığı adres Google'a gönderilir. Toplu CSV dışa aktarma ve toplu sonucu temizleme, ölçme ekranındadır. Her cihazın toplu verisi ayrıdır; cihazlar arası otomatik birleştirme yoktur.
 
 İlk çevrimiçi açılıştan sonra temel sayfalar, oyunlar ve testler servis çalışanı ile çevrimdışı kullanılabilir. MP4 videolar boyutları nedeniyle otomatik önbelleğe alınmaz; çevrimdışı saha gösterimi için önceden indirilmeleri gerekir. Tarayıcıda servis çalışanı için HTTPS veya localhost gerekir.
 
@@ -46,6 +47,7 @@ Kullanıcı önce adresi cihazında inceler. Canlı sorgu için ayrıca onay ver
 | `dist/decision-data.js`, `dist/decision.js` | Karar simülatörü |
 | `dist/assessment.js` | Anonim ön/son test ve toplu rapor |
 | `dist/message-analyzer.js`, `dist/learning-path.js` | Cihaz içi mesaj açıklaması ve isteğe bağlı öğrenme adımları |
+| `dist/chatbot-data.js`, `dist/chatbot.js` | Türkçe rehberin düzenlenebilir yanıt bankası ve yerel soru eşleştirmesi |
 | `dist/lab-scenarios.js`, `dist/practice.js`, `dist/practice.css` | Laboratuvar, taktik rehberi ve eylem önerileri |
 | `dist/url-inspector.js` | Adres ayrıştırma ve cihaz içinde QR okuma |
 | `dist/service-worker.js`, `dist/manifest.webmanifest` | Temel çevrimdışı kullanım |
