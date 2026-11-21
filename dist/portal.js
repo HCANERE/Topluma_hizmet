@@ -55,8 +55,8 @@
       if (link.dataset.siteNav === section) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
-    const activeGroup = navigationGroups[section];
-    if (activeGroup) navGroups.forEach((group) => { group.open = group.dataset.navGroup === activeGroup; });
+    const activeGroup = navigationGroups[section] || 'learn';
+    navGroups.forEach((group) => { group.open = group.dataset.navGroup === activeGroup; });
     currentSectionLabel.textContent = sectionLabels[section];
     if (section !== 'videos') videos.forEach((video) => video.pause());
     if (section !== 'chat') window.TOD_CHAT_GUIDE?.clearConversation();

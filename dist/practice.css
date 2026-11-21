@@ -4,8 +4,8 @@
 
 .practice-section {
   padding: clamp(3rem, 7vw, 5rem) 0;
-  background: #eeebf8;
-  border-bottom: 1px solid #e4e0ef;
+  background: #f5f8f9;
+  border-bottom: 1px solid #d8e4e7;
 }
 
 .practice-section h2,
@@ -33,15 +33,15 @@
   gap: .35rem;
   min-height: 7rem;
   padding: 1rem 1.15rem;
-  border-radius: 14px;
-  border: 1px solid #d7cdf2;
+  border-radius: 8px;
+  border: 1px solid #d2e0e4;
   background: #fff;
   color: var(--ink);
   text-decoration: none;
 }
 
 .practice-entry strong {
-  color: #5034a7;
+  color: #075c65;
   font-size: 1.12rem;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .practice-entry:hover {
-  border-color: #8b72d5;
+  border-color: #8dbbc2;
 }
 
 .practice-entry:hover strong {
@@ -70,10 +70,10 @@
   align-items: center;
   min-height: 48px;
   padding: .5rem 1rem;
-  color: #3f2c88;
+  color: #075c65;
   background: #fff;
-  border: 1px solid #d7cdf2;
-  border-radius: 999px;
+  border: 1px solid #b9d5da;
+  border-radius: 7px;
   font-weight: 750;
   text-decoration: none;
 }
@@ -85,22 +85,22 @@
 }
 
 .practice-nav a:hover:not([aria-current]) {
-  background: #e3d9fb;
+  background: #e9f5f5;
   text-decoration: underline;
   text-underline-offset: .15em;
 }
 
 .practice-block {
-  scroll-margin-top: 1rem;
+  scroll-margin-top: 6rem;
   margin-top: 1.5rem;
   padding: clamp(1rem, 4vw, 2.5rem);
   background: #fff;
-  border: 1px solid #ddd5ed;
-  border-radius: 24px;
+  border: 1px solid #d2e0e4;
+  border-radius: 8px;
 }
 
 .practice-block:target {
-  border-color: #8b72d5;
+  border-color: #086a73;
 }
 
 .inspector-block {
@@ -109,9 +109,9 @@
 .inspector-notice,
 .inspector-result {
   padding: 1rem 1.2rem;
-  border-radius: 16px;
-  background: #f0ebfc;
-  border: 1px solid #d8cef4;
+  border-radius: 8px;
+  background: #eff7f8;
+  border: 1px solid #c6dde1;
 }
 .inspector-notice {
   margin-bottom: 1.5rem;
@@ -130,8 +130,8 @@
   min-width: 0;
   padding: .85rem 1rem;
   font: inherit;
-  border: 2px solid #a997d7;
-  border-radius: 12px;
+  border: 2px solid #86b6bf;
+  border-radius: 7px;
 }
 .inspector-controls input:focus-visible,
 .inspector-upload input:focus-visible {
@@ -204,11 +204,11 @@
 .practice-phone,
 .practice-panel {
   padding: clamp(1rem, 2.5vw, 1.65rem);
-  border-radius: 18px;
+  border-radius: 8px;
 }
 
 .practice-phone {
-  background: #27223c;
+  background: #113244;
   color: #fff;
 }
 
@@ -226,7 +226,7 @@
 
 .phone-heading div > span {
   font-size: .875rem;
-  color: #e0d7f5;
+  color: #d4e6ea;
 }
 
 .phone-avatar {
@@ -236,15 +236,15 @@
   width: 2.65rem;
   height: 2.65rem;
   border-radius: 50%;
-  background: #bcebd6;
-  color: #1f5442;
+  background: #dff1f2;
+  color: #07515a;
   font-weight: 800;
 }
 
 .practice-bubble {
-  color: #262140;
-  background: #f0e9ff;
-  border-radius: 4px 14px 14px 14px;
+  color: #173b4c;
+  background: #edf6f7;
+  border-radius: 4px 9px 9px 9px;
   padding: .85rem 1rem;
 }
 
@@ -256,32 +256,32 @@
 .phone-actions button {
   min-height: 46px;
   padding: .6rem .85rem;
-  border: 1px solid #786a96;
-  border-radius: 10px;
-  background: #3c3355;
+  border: 1px solid #7da4ae;
+  border-radius: 7px;
+  background: #224b5d;
   color: #fff;
   text-align: start;
   font-weight: 700;
 }
 
 .phone-actions button:hover:not(:disabled) {
-  background: #504269;
+  background: #2b6072;
 }
 
 .phone-actions button[aria-pressed="true"] {
-  border-color: #9addbf;
-  background: #c9f3df;
-  color: #173e32;
+  border-color: #84c1c7;
+  background: #dff1f2;
+  color: #07515a;
 }
 
 .phone-actions button[aria-pressed="true"]:hover {
-  background: #dcfaec;
+  background: #eaf8f8;
 }
 
 .practice-panel {
   min-height: 270px;
-  background: #faf8ff;
-  border: 1px solid #e4ddf1;
+  background: #f7fafb;
+  border: 1px solid #d5e4e8;
 }
 
 .practice-panel h4 {
@@ -311,8 +311,8 @@
 .practice-evidence li {
   padding: .65rem .8rem;
   background: #fff;
-  border: 1px solid #e4ddf1;
-  border-radius: 10px;
+  border: 1px solid #d5e4e8;
+  border-radius: 7px;
 }
 
 .practice-evidence li p {
@@ -320,7 +320,7 @@
 }
 
 .lab-outcome {
-  border-top: 1px solid #ddd4ee;
+  border-top: 1px solid #d5e4e8;
   padding-top: 1rem;
   margin-top: 1rem;
 }
@@ -328,8 +328,8 @@
 .practice-details {
   padding: .75rem .85rem;
   margin: .8rem 0;
-  background: #ede5ff;
-  border-radius: 12px;
+  background: #edf6f7;
+  border-radius: 7px;
 }
 
 .practice-details p {
@@ -353,7 +353,7 @@
 
 .lab-tactics a,
 .practice-sources a {
-  color: #5034a7;
+  color: #075c65;
   text-underline-offset: .15em;
 }
 
@@ -365,7 +365,7 @@
 }
 
 .tactic-card {
-  scroll-margin-top: 1rem;
+  scroll-margin-top: 6rem;
   padding: .15rem 1rem;
   background: #eff8f3;
   border: 1px solid #cbe5d6;

@@ -1,4 +1,4 @@
-const CACHE = 'tod-training-v10';
+const CACHE = 'tod-training-v12';
 const CORE = [
   './', 'index.html', 'style.css', 'practice.css', 'portal.css', 'favicon.svg', 'manifest.webmanifest',
   'data.js', 'extra-scenarios.js', 'app.js', 'lab-scenarios.js', 'practice.js', 'url-inspector.js',
