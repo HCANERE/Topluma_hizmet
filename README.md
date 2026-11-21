@@ -32,6 +32,10 @@ npm start
 
 Tarayıcıda <http://127.0.0.1:8766> adresini açın. `npm test` içerik ve temel akış kontrollerini çalıştırır. Statik yayın dizini `dist/` klasörüdür. Bu depodaki kaynak kodu güncellemek siteyi kendiliğinden yayına almaz.
 
+### Canlı yayın
+
+Site [sibertoplum.omeratici.com](https://sibertoplum.omeratici.com/) adresinde Plesk üzerinden statik olarak yayımlanır. HTTP istekleri HTTPS'ye 301 ile yönlendirilir. Yeni sürüm için `npm test` çalıştırın, ardından `dist/` içeriğini alt alan adının web köküne yükleyin. `dist/web.config`, Windows/IIS sunucusunda video, altyazı, SVG ve yerel OCR dosyalarının doğru içerik türüyle sunulmasını sağlar. Yükleme arşivini web kökünde bırakmayın. GitHub'a gönderim otomatik yayın yapmaz.
+
 OCR akışını gerçek mesaj kullanmadan denemek için `tests/ocr-sample.png` içindeki kurgusal metni seçebilirsiniz.
 
 Yeni senaryo hazırlamak için `tools/senaryo-editoru.html` dosyasını ekip bilgisayarında açın. JSON'u indirdikten sonra `node scripts/add-scenarios.mjs DOSYA.json --check` ile doğrulayın, ardından `--check` olmadan depoya ekleyin ve `npm test` çalıştırın. Bu yerel içerik aracı bir oturum açma veya yetki sistemi değildir; dışa aktarılan senaryolar yayımlanmadan önce ekipçe incelenmelidir.
