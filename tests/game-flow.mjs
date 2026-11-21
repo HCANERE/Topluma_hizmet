@@ -31,7 +31,8 @@ class Node {
   getContext() { return { drawImage() {}, getImageData() { return { data: new Uint8ClampedArray(16) }; } }; }
 }
 const html = fs.readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
-const scriptFiles = Array.from(html.matchAll(/<script src="([\w-]+\.js)" defer><\/script>/g), ([, file]) => file);
+const scriptFiles = Array.from(html.matchAll(/<script src="([\w-]+\.js)" defer><\/script>/g), ([, file]) => file)
+  .filter((file) => ['data.js', 'app.js', 'lab-scenarios.js', 'practice.js', 'url-inspector.js'].includes(file));
 function launch(stored = {}, blocked = false, initialHash = '') {
   const ids = new Map();
   const views = [];

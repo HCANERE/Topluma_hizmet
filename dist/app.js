@@ -5,10 +5,13 @@
   const screens = {
     home: document.querySelector('#home-screen'),
     practice: document.querySelector('#practice-screen'),
+    decision: document.querySelector('#decision-screen'),
+    videos: document.querySelector('#videos-screen'),
+    assessment: document.querySelector('#assessment-screen'),
     game: document.querySelector('#game-screen'),
     result: document.querySelector('#result-screen')
   };
-  const screenHeadings = { home: '#home-title', practice: '#practice-title', game: '#question-title', result: '#result-title' };
+  const screenHeadings = { home: '#home-title', practice: '#practice-title', decision: '#decision-title', videos: '#videos-title', assessment: '#assessment-title', game: '#question-title', result: '#result-title' };
   const siteShell = document.querySelector('#site-shell');
   const skipLink = document.querySelector('#skip-link');
   const practiceViews = new Map(Array.from(document.querySelectorAll('[data-practice-view]'), (view) => [view.id, view]));
@@ -71,13 +74,20 @@
     siteShell.hidden = playing;
     document.body.classList.toggle('playing', playing);
     if (!playing) document.body.classList.remove('senior-mode');
-    skipLink.setAttribute('href', name === 'practice' ? '#practice-screen' : '#main');
+    skipLink.setAttribute('href', {
+      practice: '#practice-screen', decision: '#decision-screen', videos: '#videos-screen', assessment: '#assessment-screen'
+    }[name] || '#main');
     window.scrollTo(0, 0);
     focusTarget.focus({ preventScroll: true });
   }
 
   function syncLocation() {
     const id = window.location.hash.slice(1);
+    const moduleRoutes = { 'karar-simulatoru': 'decision', 'egitim-videolari': 'videos', olcme: 'assessment' };
+    if (moduleRoutes[id]) {
+      showScreen(moduleRoutes[id]);
+      return;
+    }
     const tactic = tacticCards.get(id);
     const view = practiceViews.get(tactic ? 'taktik-rehberi' : id);
     if (view) {
@@ -93,7 +103,7 @@
       return;
     }
 
-    const anchors = new Map([['kategoriler', 'category-title'], ['pratik', 'practice-home-title'], ['nasil-calisir', 'how-title'], ['main', 'main']]);
+    const anchors = new Map([['kategoriler', 'category-title'], ['pratik', 'practice-home-title'], ['nasil-calisir', 'how-title'], ['ozellikler', 'features-title'], ['main', 'main']]);
     const target = document.getElementById(anchors.get(id));
     showScreen('home', target ?? undefined);
     if (target) target.scrollIntoView({ block: 'start' });

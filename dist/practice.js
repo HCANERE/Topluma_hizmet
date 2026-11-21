@@ -151,6 +151,28 @@
         report
       ],
       done: 'Hesabını kontrol ettin ve şüpheli mesajı bildirdin. Hesaba erişimini kaybedersen uygulamanın resmî hesap kurtarma yolunu kullan.'
+    },
+    card: {
+      title: 'Kart bilgileri paylaşıldı',
+      brief: 'Şüpheli bir sayfaya kart bilgilerini girdin. Gerçek bir işlem olup olmadığını henüz bilmiyorsun.',
+      steps: [
+        { label: 'Bankayı bildiğim kanaldan ararım', note: 'Kartın arkasındaki veya bankanın kendi uygulamasındaki iletişim bilgisini kullandın; şüpheli sayfadaki numarayı aramadın.' },
+        { label: 'Kartın kullanımını durdurmayı isterim', note: 'Bankayla birlikte kartı geçici olarak kapatma veya değiştirme seçeneğini değerlendirdin.' },
+        { label: 'Hareketleri ve bildirimleri incelerim', note: 'Tanımadığın işlemleri bankaya bildirip itiraz sürecini bankadan öğrendin.' },
+        { label: 'İlgili kayıtları saklarım', note: 'Mesajı ve işlem bilgilerini sakladın; şifre veya kart bilgisini başka biriyle paylaşmadın.' }
+      ],
+      done: 'Bankanla resmî kanaldan görüştün ve kart hareketlerini kontrol ettin. İşlem sonucunu banka belirler; burada para iadesi garantisi verilmez.'
+    },
+    money: {
+      title: 'Şüpheli hesaba para gönderildi',
+      brief: 'Acele bir isteğe inanıp para gönderdin. Mesajın sahte olabileceğini fark ettin.',
+      steps: [
+        { label: 'Bankamla hemen görüşürüm', note: 'Gönderdiğin bankanın kendi uygulamasındaki veya önceden bildiğin numarasındaki desteğe başvurdun.' },
+        { label: 'İşlem bilgilerini saklarım', note: 'Tarih, tutar, alıcı ve görüşme kayıtlarını başvuru için sakladın.' },
+        { label: 'Resmî başvuru yolunu öğrenirim', note: 'Bankadan sonraki adımları öğrendin; gerekiyorsa kolluk veya ilgili resmî makama başvurursun.' },
+        { label: 'Aynı isteği çevreme bildiririm', note: 'Yakınlarına aynı yöntemle mesaj gelebileceğini söyledin; hassas bilgilerini paylaşmadın.' }
+      ],
+      done: 'Hızlı davranıp bankanla görüştün ve kayıtları korudun. Sonuç olayın koşullarına bağlıdır; bu alıştırma hukuki veya finansal sonuç garantisi vermez.'
     }
   };
 

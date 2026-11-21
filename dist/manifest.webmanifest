@@ -1,0 +1,11 @@
+{
+  "name": "Tıklamadan Önce Düşün",
+  "short_name": "Önce Düşün",
+  "description": "Türkçe dijital güvenlik eğitimi, oyunlar ve kısa testler",
+  "lang": "tr",
+  "start_url": "./#ana-sayfa",
+  "display": "standalone",
+  "background_color": "#f6fafb",
+  "theme_color": "#0a2e43",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

@@ -1,7 +1,52 @@
 (function () {
   'use strict';
 
-  // Bu araç yalnızca adresin yapısını açıklar; siteye istek göndermez.
+  // This local list is the Mozilla Public Suffix List, stored with its MPL 2.0 notice.
+  let suffixRules = null;
+  let suffixLoading = null;
+  function parseSuffixRules(source) {
+    const rules = { exact: new Set(), wildcard: new Set(), exception: new Set() };
+    for (const line of source.split(/\r?\n/)) {
+      const rule = line.trim();
+      if (!rule || rule.startsWith('//')) continue;
+      const exception = rule.startsWith('!');
+      const wildcard = rule.startsWith('*.');
+      const name = rule.slice(exception ? 1 : wildcard ? 2 : 0);
+      try {
+        const ascii = new URL(`https://${name}`).hostname.replace(/\.$/, '').toLowerCase();
+        rules[exception ? 'exception' : wildcard ? 'wildcard' : 'exact'].add(ascii);
+      } catch (_) { /* Ignore malformed data rather than guessing a domain. */ }
+    }
+    return rules;
+  }
+  function registeredDomain(hostname, rules = suffixRules) {
+    if (!rules || !hostname || hostname.startsWith('[') || /^\d+(?:\.\d+){3}$/.test(hostname)) return null;
+    const labels = hostname.replace(/\.$/, '').toLowerCase().split('.');
+    if (labels.length < 2) return null;
+    let longest = 1;
+    let exception = 0;
+    for (let index = 0; index < labels.length; index += 1) {
+      const suffix = labels.slice(index).join('.');
+      const length = labels.length - index;
+      if (rules.exact.has(suffix)) longest = Math.max(longest, length);
+      if (index > 0 && rules.wildcard.has(suffix)) longest = Math.max(longest, length + 1);
+      if (rules.exception.has(suffix)) exception = Math.max(exception, length);
+    }
+    const suffixLength = exception ? exception - 1 : longest;
+    return labels.length > suffixLength ? labels.slice(-(suffixLength + 1)).join('.') : null;
+  }
+  function loadSuffixRules() {
+    if (suffixRules) return Promise.resolve(suffixRules);
+    if (!suffixLoading) suffixLoading = typeof fetch === 'function'
+      ? fetch('vendor/public_suffix_list.dat').then((response) => {
+        if (!response.ok) throw new Error('Domain list unavailable');
+        return response.text();
+      }).then((source) => { suffixRules = parseSuffixRules(source); return suffixRules; }).catch(() => null)
+      : Promise.resolve(null);
+    return suffixLoading;
+  }
+
+  // Bu araç yalnızca adresin yapısını açıklar; girilen adrese istek göndermez.
   function analyzeAddress(value) {
     const input = String(value || '').trim();
     if (!input) return { error: 'Önce bir web adresi girin.' };
@@ -41,15 +86,24 @@
     if (url.search || url.hash) {
       findings.push('Adreste ek parametreler veya sayfa içi bölüm var. Bunlar burada gösterilmez; adresi başkalarıyla paylaşmadan önce kişisel bilgi içerip içermediğine bakın.');
     }
+    if (url.port) {
+      findings.push('Adreste özel bir bağlantı noktası (port) kullanılıyor. Bu tek başına tehlike anlamına gelmez; adresi bağımsız doğrulayın.');
+    }
+
+    const registered = registeredDomain(url.hostname);
+    if (registered && registered !== url.hostname) {
+      findings.push(`Bağlantı, ${registered} alan adının altındaki bir adrese gidiyor. Soldaki tanıdık kelimeler ayrı bir kurumun sitesi olduğunu kanıtlamaz.`);
+    }
 
     return {
       host: url.host,
+      registered,
       summary: 'Bu işaretler tek başına bir bağlantının zararlı veya güvenli olduğunu belirlemez. Adresin kime ait olduğunu bağımsız kaynaktan doğrulayın.',
       findings
     };
   }
 
-  window.TOD_URL_INSPECTOR = { analyzeAddress };
+  window.TOD_URL_INSPECTOR = { analyzeAddress, parseSuffixRules, registeredDomain };
   const form = document.getElementById('inspector-form');
   if (!form) return;
   const input = document.getElementById('inspector-input');
@@ -60,12 +114,14 @@
   const qrInput = document.getElementById('inspector-qr');
   const qrStatus = document.getElementById('inspector-qr-status');
 
-  function showAnalysis(value) {
+  async function showAnalysis(value) {
+    await loadSuffixRules();
     const analysis = analyzeAddress(value);
     summary.textContent = analysis.error || analysis.summary;
     host.textContent = analysis.host || '';
     host.hidden = !analysis.host;
     document.querySelector('.inspector-host-label').hidden = !analysis.host;
+    byIdRegistered.textContent = analysis.registered ? `Kayıtlı alan adı: ${analysis.registered}` : analysis.host ? 'Kayıtlı alan adı belirlenemedi; tam adresi ayrıca kontrol edin.' : '';
     findings.replaceChildren(...(analysis.findings || []).map((message) => {
       const item = document.createElement('li');
       item.textContent = message;
@@ -75,10 +131,11 @@
     document.getElementById('inspector-result-title').focus();
   }
 
-  form.addEventListener('submit', (event) => {
+  const byIdRegistered = document.getElementById('inspector-registered');
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     qrStatus.textContent = '';
-    showAnalysis(input.value);
+    await showAnalysis(input.value);
   });
 
   let jsQrLoading;
@@ -140,7 +197,7 @@
       }
       input.value = rawValue;
       qrStatus.textContent = 'QR kod okundu. İçeriği aşağıda inceleyin; bağlantı açılmadı.';
-      showAnalysis(input.value);
+      await showAnalysis(input.value);
     } catch (_) {
       qrStatus.textContent = 'Bu tarayıcı görseldeki QR kodu okuyamadı. Adresi elle yazabilirsiniz.';
     }

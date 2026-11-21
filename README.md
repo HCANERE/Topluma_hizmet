@@ -1,60 +1,46 @@
 # Tıklamadan Önce Düşün
 
-Türkçe, mobil uyumlu ve tamamen statik bir dijital dolandırıcılık farkındalık oyunu. Üyelik, veritabanı, kişisel veri toplama ve sunucu kodu yoktur. Yalnızca kategori bazında en iyi puan ve metin boyutu tercihi bu tarayıcıda saklanır; herhangi bir sunucuya gönderilmez.
+Selçuk Üniversitesi Topluma Hizmet Uygulamaları dersi için geliştirilen, Türkçe ve mobil uyumlu dijital güvenlik eğitim platformu. Resmî proje adı **Güvenli Dijital Toplum: Toplum Geneli Siber Güvenlik Farkındalık Projesi**. Dersin kapsamı ve saha uygulaması için [uyum planına](docs/ders-uyum-plani.md) bakın.
 
-Bu oyun, dersin **Güvenli Dijital Toplum: Toplum Geneli Siber Güvenlik Farkındalık Projesi** için hazırlanan etkileşimli eğitim aracıdır. Dersin diğer çıktıları ve ölçüm hedefleri için [ders belgelerine uyum planına](docs/ders-uyum-plani.md) bakın. Oyundaki puan, dersin ön test/son test etki ölçümü değildir.
+## Bölümler
+
+- **Ana sayfa:** Platformun bölümlerini ve öğrenme yolunu tanıtan giriş. Masaüstünde yan menü, telefonda açılır menü kullanılır.
+- **Senaryo oyunları:** Gençler, ebeveynler ve ileri yaştaki kullanıcılar için 18 kurgusal durumdan kategori başına rastgele seçilen beş soruluk turlar. Oyun puanı sadece o turu anlatır.
+- **Karar simülatörü:** Yedi olayda işareti fark etme, bağımsız doğrulama ve güvenli eylem seçimini üç adımda prova etme.
+- **Tuzak Laboratuvarı ve Taktik Rehberi:** Aynı görünen mesajların farklı sonuçlarını karşılaştırma ve sık kullanılan dolandırıcılık yöntemlerini öğrenme.
+- **Bağlantı ve QR inceleme:** Girilen adresi açmadan ana alan adını, alt alan adını ve dikkat gerektiren yapısal işaretleri açıklama. QR görseli cihazda okunur. Bu araç canlı zararlı site sorgusu veya virüs taraması yapmaz; güvenlik garantisi vermez.
+- **Eğitim videoları:** Tanıtım filmi ve altı kısa eğitim videosu. Türkçe altyazı, konu filtresi ve dikey videolar için uygun oynatıcı vardır.
+- **Ön test / Son test:** Aynı beş kazanımı eğitim öncesi ve sonrası kısa sorularla ölçme; cihazdaki anonim toplu sonucu ve geri bildirimi CSV olarak dışa aktarma. Oyun puanları bu ölçüme katılmaz.
+- **Şimdi Ne Yapacağım?:** Bağlantı açma, kod paylaşma, kart bilgisi girme veya para gönderme gibi durumlarda ilk güvenli adımları gösterme.
 
 ## Çalıştırma
 
-Node.js 18 veya üstüyle proje dizininde çalıştırın.
+Node.js 18 veya üstü yeterlidir; harici npm paketi, üyelik, veritabanı ve backend gerekmez.
 
 ```sh
 npm start
 ```
 
-Tarayıcıda http://127.0.0.1:8766 adresini açın. Projenin harici paket bağımlılığı yoktur. Npm kullanmadan aynı yerel sunucuyu `node scripts/serve.mjs` ile başlatabilirsiniz. Statik barındırma için yayın dizini `dist/` olarak kalır.
+Tarayıcıda <http://127.0.0.1:8766> adresini açın. `npm test` içerik ve temel akış kontrollerini çalıştırır. Statik yayın dizini `dist/` klasörüdür. Bu depodaki kaynak kodu güncellemek siteyi kendiliğinden yayına almaz.
 
-Etkileşimli Pratik menüsünde **Tuzak Laboratuvarı**, **Taktik Rehberi**, **Şimdi Ne Yapacağım?** ve **Bağlantı ve QR incele** ekranları bulunur. Her ekran doğrudan bir bağlantıyla açılabilir (`#laboratuvar`, `#taktik-rehberi`, `#zarar-kontrolu`, `#baglanti-incele`).
+## Veri ve çevrimdışı kullanım
 
-**Bağlantı ve QR incele** (`#baglanti-incele`) ekranı, yazılan web adresinin gerçekten hangi sunucuya gittiğini ve adres yapısındaki dikkat gerektiren işaretleri açıklar. Seçilen QR görseli cihazda okunur; tarayıcının yerleşik okuyucusu yoksa aynı sitedeki JavaScript çözücüsü kullanılır. Girilen adres açılmaz, saklanmaz veya bir sunucuya gönderilmez. Bu araç virüs taraması veya canlı zararlı site sorgusu yapmaz; hiçbir bağlantıya “güvenli” garantisi vermez.
+İsim, e-posta, telefon veya yaş bilgisi istenmez. Oyunların en iyi puanı, metin boyutu tercihi ve tamamlanmış testlerin **yalnızca toplu sayıları** bu tarayıcının yerel depolamasında tutulur. Bağlantı/QR içeriği ve bireysel test yanıtları saklanmaz veya sunucuya gönderilmez. Toplu CSV dışa aktarma ve toplu sonucu temizleme, ölçme ekranındadır. Her cihazın toplu verisi ayrıdır; cihazlar arası otomatik birleştirme yoktur.
 
-Tuzak Laboratuvarı’nda bir arkadaşın para isteği, bir kargo bildirimi ve bir hesap oturumu uyarısı var. Her sahnenin iki sürümü aynı mesajla başlar. Farkı bağımsız bir kanaldan kontrol ettiğinde görebilirsin.
+İlk çevrimiçi açılıştan sonra temel sayfalar, oyunlar ve testler servis çalışanı ile çevrimdışı kullanılabilir. MP4 videolar boyutları nedeniyle otomatik önbelleğe alınmaz; çevrimdışı saha gösterimi için önceden indirilmeleri gerekir. Tarayıcıda servis çalışanı için HTTPS veya localhost gerekir.
 
-Kod değişikliklerini `npm test` ile doğrulayın.
+## Kod yapısı
 
-## Dosyalar
+| Dosya | Görev |
+| --- | --- |
+| `dist/index.html`, `dist/style.css`, `dist/portal.css`, `dist/portal.js` | Sayfalar, platform görünümü, menü ve video filtresi |
+| `dist/data.js`, `dist/app.js` | Kategori oyununun içerik ve akışı |
+| `dist/decision-data.js`, `dist/decision.js` | Karar simülatörü |
+| `dist/assessment.js` | Anonim ön/son test ve toplu rapor |
+| `dist/lab-scenarios.js`, `dist/practice.js`, `dist/practice.css` | Laboratuvar, taktik rehberi ve eylem önerileri |
+| `dist/url-inspector.js` | Adres ayrıştırma ve cihaz içinde QR okuma |
+| `dist/service-worker.js`, `dist/manifest.webmanifest` | Temel çevrimdışı kullanım |
+| `dist/media/` | Yerel MP4 videolar, WebVTT altyazılar ve posterler |
+| `scripts/serve.mjs` | MP4 aralık isteklerini de destekleyen yerel sunucu |
 
-- `dist/index.html`: Ana sayfa, oyun ve sonuç ekranları.
-- `dist/style.css`: Görünüm ve mobil/erişilebilir düzen.
-- `dist/data.js`: Üç kategorideki 18 kurgusal senaryo ve açıklamaları. Her turda kategoriden rastgele beş soru seçilir; her doğru cevap 20 puandır.
-- `dist/app.js`: Ekranlar arası gezinme, kategori seçimi, cevap kontrolü ve puanlama.
-- `dist/lab-scenarios.js`: Laboratuvarın sahneleri, inceleme adımları ve her sürümün sonuçları.
-- `dist/practice.js` ve `dist/practice.css`: Laboratuvar, taktik rehberi ve kurtarma alıştırmalarının davranışı ve stili.
-- `dist/url-inspector.js`: Bağlantı yapısı açıklamaları ve yerel QR okuma akışı.
-- `dist/vendor/jsQR.js`: Yerleşik QR okuma desteği bulunmayan tarayıcılar için yalnızca QR seçildiğinde yüklenen [jsQR 1.4.0](https://github.com/cozmo/jsQR) (Apache-2.0); lisans metni aynı dizindedir.
-
-Senaryolardaki kurum ve kişiler kurgusaldır. Örnek alan adları tıklanabilir değildir.
-
-
-## Arayüz yenilemesi
-
-Mor, mercan ve mint renklerinden oluşan arayüz; kurgusal mesaj görselli açılış alanı, kategori kartları, oyun ekranı ve sonuç ekranında ortak bir görsel dil kullanır. Yeni font veya görsel için dış servise istek atmaz.
-
-- Büyük metin düğmesi, metni büyütür ve tercihi bu tarayıcıda hatırlar. İleri yaş kategorisinin ek okunabilirlik ayarı da korunur.
-- Tamamlanan kategoriler ve en iyi puanları bu tarayıcıda görünür. Tarayıcı depolaması kapalıysa oyun çalışmaya devam eder.
-- Klavye odağı, ekran okuyucu açıklamaları ve azaltılmış hareket tercihi desteklenir.
-
-Kontroller: `node checks.mjs`, `node tests/game-flow.mjs` ve `node --check dist/app.js`. Oyun akışı testi tarayıcı yerine küçük bir DOM benzetimi kullanır; gerçek tarayıcıda masaüstü ve mobil görünüm ayrıca kontrol edilmelidir.
-
-## Sonraki geliştirmeler
-
-1. **Karışık senaryolar:** Üç kategoriden rastgele beş soru seçen bir tekrar modu; kategori odaklı ilk öğrenmenin ardından kullanılabilir.
-2. **Mesajda işaret bulma:** Oyuncunun acele ettirme, para isteme ve kod paylaşma gibi şüpheli ifadeleri işaretlediği ikinci bir oyun türü.
-3. **Saha uygulaması için ölçüm:** Dersin ön test ve son testini oyun puanından ayrı tutan anonim değerlendirme akışı. Önce soru ve veri saklama kuralları belirlenmelidir.
-4. **Kolay içerik yönetimi:** Eğitim ekibinin yeni soruları ekleyebilmesi için veri doğrulaması ve yerel JSON içe aktarma aracı.
-
-## Yeni senaryolar ve tur akışı
-
-Gençler kategorisine menü görüntülemek için kart bilgisi isteyen bir QR sayfası, ebeveynler kategorisine bağımsız uygulamada doğrulanmış bir teslimat bildirimi, ileri yaş kategorisine yapay ses/video taklidi örneği eklendi. Her kategoride altı senaryo vardır. Her turda bunların beşi karıştırılarak seçilir; aynı soru tur içinde tekrarlanmaz. Her doğru cevap 20 puandır.
-
-Başlıklardaki cevabı ele veren ifadeler kaldırıldı. Geri bildirimde kullanılan “Dikkat edilecek noktalar” başlığı hem riskli hem de doğrulanmış örnekleri kapsar.
+İçerikteki kişi ve kurumlar kurgusaldır; örnek adresler tıklanabilir değildir. Harici yazılım olarak [jsQR 1.4.0](https://github.com/cozmo/jsQR) (Apache-2.0, lisans dosyası `dist/vendor/` içinde) ve [Mozilla Public Suffix List](https://publicsuffix.org/list/) (MPL 2.0, `dist/vendor/public_suffix_list.dat`) kullanılır. İçerikte yararlanılan kurumsal kaynaklar sitenin alt bölümünde bağlantılıdır. Eğitim videoları bu proje kapsamında daha önce üretilen yerel dosyalardır.

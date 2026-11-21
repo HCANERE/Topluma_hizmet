@@ -9,6 +9,10 @@ const types = new Map([
   ['js', 'text/javascript; charset=utf-8'],
   ['svg', 'image/svg+xml'],
   ['txt', 'text/plain; charset=utf-8'],
+  ['dat', 'text/plain; charset=utf-8'],
+  ['vtt', 'text/vtt; charset=utf-8'],
+  ['mp4', 'video/mp4'],
+  ['webmanifest', 'application/manifest+json'],
 ]);
 
 export async function serveStatic(request, response) {
@@ -19,8 +23,8 @@ export async function serveStatic(request, response) {
 
   const path = (request.url ?? '/').split('?', 1)[0];
   const file = path === '/' ? 'index.html' : path.slice(1);
-  const match = /^(?:vendor\/)?([a-z0-9-]+)\.([a-z]+)$/i.exec(file);
-  const type = match && types.get(match[2]);
+  const match = /^(?:(?:vendor|media)\/)?[a-z0-9][a-z0-9._-]*\.([a-z0-9]+)$/i.exec(file);
+  const type = match && types.get(match[1]);
 
   if (!type) {
     response.writeHead(404).end();
@@ -29,7 +33,25 @@ export async function serveStatic(request, response) {
 
   try {
     const content = await readFile(new URL(file, assets));
-    response.writeHead(200, { 'Content-Type': type });
+    const headers = { 'Content-Type': type, 'Accept-Ranges': 'bytes' };
+    const range = /^bytes=(\d*)-(\d*)$/.exec(request.headers.range ?? '');
+    if (range) {
+      let start = range[1] ? Number(range[1]) : Math.max(0, content.length - Number(range[2]));
+      let end = range[2] && range[1] ? Number(range[2]) : content.length - 1;
+      if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start >= content.length || start > end || end < 0) {
+        response.writeHead(416, { 'Content-Range': `bytes */${content.length}` }).end();
+        return;
+      }
+      start = Math.max(0, start);
+      end = Math.min(content.length - 1, end);
+      headers['Content-Range'] = `bytes ${start}-${end}/${content.length}`;
+      headers['Content-Length'] = end - start + 1;
+      response.writeHead(206, headers);
+      response.end(request.method === 'HEAD' ? undefined : content.subarray(start, end + 1));
+      return;
+    }
+    headers['Content-Length'] = content.length;
+    response.writeHead(200, headers);
     response.end(request.method === 'HEAD' ? undefined : content);
   } catch (error) {
     if (error.code === 'ENOENT') response.writeHead(404).end();
