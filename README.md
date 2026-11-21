@@ -16,7 +16,7 @@ Tarayıcıda http://127.0.0.1:8766 adresini açın. Projenin harici paket bağı
 
 Etkileşimli Pratik menüsünde **Tuzak Laboratuvarı**, **Taktik Rehberi**, **Şimdi Ne Yapacağım?** ve **Bağlantı ve QR incele** ekranları bulunur. Her ekran doğrudan bir bağlantıyla açılabilir (`#laboratuvar`, `#taktik-rehberi`, `#zarar-kontrolu`, `#baglanti-incele`).
 
-**Bağlantı ve QR incele** (`#baglanti-incele`) ekranı, yazılan web adresinin gerçekten hangi sunucuya gittiğini ve adres yapısındaki dikkat gerektiren işaretleri açıklar. Destekleyen tarayıcılarda seçilen QR görseli cihazda okunur; diğer tarayıcılarda adres elle girilebilir. Girilen adres açılmaz, saklanmaz veya bir sunucuya gönderilmez. Bu araç virüs taraması veya canlı zararlı site sorgusu yapmaz; hiçbir bağlantıya “güvenli” garantisi vermez.
+**Bağlantı ve QR incele** (`#baglanti-incele`) ekranı, yazılan web adresinin gerçekten hangi sunucuya gittiğini ve adres yapısındaki dikkat gerektiren işaretleri açıklar. Seçilen QR görseli cihazda okunur; tarayıcının yerleşik okuyucusu yoksa aynı sitedeki JavaScript çözücüsü kullanılır. Girilen adres açılmaz, saklanmaz veya bir sunucuya gönderilmez. Bu araç virüs taraması veya canlı zararlı site sorgusu yapmaz; hiçbir bağlantıya “güvenli” garantisi vermez.
 
 Tuzak Laboratuvarı’nda bir arkadaşın para isteği, bir kargo bildirimi ve bir hesap oturumu uyarısı var. Her sahnenin iki sürümü aynı mesajla başlar. Farkı bağımsız bir kanaldan kontrol ettiğinde görebilirsin.
 
@@ -30,7 +30,8 @@ Kod değişikliklerini `npm test` ile doğrulayın.
 - `dist/app.js`: Ekranlar arası gezinme, kategori seçimi, cevap kontrolü ve puanlama.
 - `dist/lab-scenarios.js`: Laboratuvarın sahneleri, inceleme adımları ve her sürümün sonuçları.
 - `dist/practice.js` ve `dist/practice.css`: Laboratuvar, taktik rehberi ve kurtarma alıştırmalarının davranışı ve stili.
-- `dist/url-inspector.js`: Bağlantı yapısı açıklamaları ve tarayıcı destekliyorsa yerel QR okuma.
+- `dist/url-inspector.js`: Bağlantı yapısı açıklamaları ve yerel QR okuma akışı.
+- `dist/vendor/jsQR.js`: Yerleşik QR okuma desteği bulunmayan tarayıcılar için yalnızca QR seçildiğinde yüklenen [jsQR 1.4.0](https://github.com/cozmo/jsQR) (Apache-2.0); lisans metni aynı dizindedir.
 
 Senaryolardaki kurum ve kişiler kurgusaldır. Örnek alan adları tıklanabilir değildir.
 

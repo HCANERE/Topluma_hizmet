@@ -81,6 +81,42 @@
     showAnalysis(input.value);
   });
 
+  let jsQrLoading;
+  function loadJsQr() {
+    if (typeof window.jsQR === 'function') return Promise.resolve(window.jsQR);
+    if (!jsQrLoading) {
+      jsQrLoading = new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'vendor/jsQR.js';
+        script.onload = () => typeof window.jsQR === 'function' ? resolve(window.jsQR) : reject(new Error('QR çözücü yüklenemedi'));
+        script.onerror = () => reject(new Error('QR çözücü yüklenemedi'));
+        document.head.append(script);
+      });
+    }
+    return jsQrLoading;
+  }
+
+  async function decodeLocally(file) {
+    const scan = await loadJsQr();
+    const objectUrl = URL.createObjectURL(file);
+    const image = new Image();
+    try {
+      image.src = objectUrl;
+      await image.decode();
+      const scale = Math.min(1, 1800 / Math.max(image.naturalWidth, image.naturalHeight));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+      canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+      const context = canvas.getContext('2d', { willReadFrequently: true });
+      if (!context) throw new Error('Görsel işlenemedi');
+      context.drawImage(image, 0, 0, canvas.width, canvas.height);
+      const pixels = context.getImageData(0, 0, canvas.width, canvas.height);
+      return scan(pixels.data, canvas.width, canvas.height)?.data || null;
+    } finally {
+      URL.revokeObjectURL(objectUrl);
+    }
+  }
+
   qrInput.addEventListener('change', async () => {
     const file = qrInput.files?.[0];
     if (!file) return;
@@ -88,19 +124,21 @@
       qrStatus.textContent = 'PNG, JPG veya WebP biçiminde, 5 MB altı bir görsel seçin.';
       return;
     }
-    if (!('BarcodeDetector' in window)) {
-      qrStatus.textContent = 'Bu tarayıcı QR görselini okuyamıyor. QR kodda görünen adresi yukarıya elle yazın.';
-      return;
-    }
     try {
       qrStatus.textContent = 'QR kod cihazınızda okunuyor…';
-      const detector = new window.BarcodeDetector({ formats: ['qr_code'] });
-      const codes = await detector.detect(file);
-      if (!codes.length) {
+      let rawValue;
+      if ('BarcodeDetector' in window) {
+        try {
+          const detector = new window.BarcodeDetector({ formats: ['qr_code'] });
+          rawValue = (await detector.detect(file))[0]?.rawValue;
+        } catch (_) { /* The local JavaScript decoder is used below. */ }
+      }
+      if (!rawValue) rawValue = await decodeLocally(file);
+      if (!rawValue) {
         qrStatus.textContent = 'Bu görselde okunabilir bir QR kod bulunamadı. Adresi elle yazabilirsiniz.';
         return;
       }
-      input.value = codes[0].rawValue;
+      input.value = rawValue;
       qrStatus.textContent = 'QR kod okundu. İçeriği aşağıda inceleyin; bağlantı açılmadı.';
       showAnalysis(input.value);
     } catch (_) {

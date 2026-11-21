@@ -8,6 +8,7 @@ const types = new Map([
   ['css', 'text/css; charset=utf-8'],
   ['js', 'text/javascript; charset=utf-8'],
   ['svg', 'image/svg+xml'],
+  ['txt', 'text/plain; charset=utf-8'],
 ]);
 
 export async function serveStatic(request, response) {
@@ -18,7 +19,7 @@ export async function serveStatic(request, response) {
 
   const path = (request.url ?? '/').split('?', 1)[0];
   const file = path === '/' ? 'index.html' : path.slice(1);
-  const match = /^([a-z0-9-]+)\.([a-z]+)$/i.exec(file);
+  const match = /^(?:vendor\/)?([a-z0-9-]+)\.([a-z]+)$/i.exec(file);
   const type = match && types.get(match[2]);
 
   if (!type) {

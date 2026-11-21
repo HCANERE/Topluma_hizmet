@@ -28,6 +28,7 @@ class Node {
   focus() { this.focused = true; }
   scrollIntoView() { this.scrolled = true; }
   click() { this.handlers.click?.(); }
+  getContext() { return { drawImage() {}, getImageData() { return { data: new Uint8ClampedArray(16) }; } }; }
 }
 const html = fs.readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
 const scriptFiles = Array.from(html.matchAll(/<script src="([\w-]+\.js)" defer><\/script>/g), ([, file]) => file);
@@ -94,7 +95,16 @@ function launch(stored = {}, blocked = false, initialHash = '') {
       }
     }
   };
-  const context = {document, window, URL, localStorage: {
+  class TestURL extends URL {
+    static createObjectURL() { return 'blob:local-qr-test'; }
+    static revokeObjectURL() {}
+  }
+  class TestImage {
+    naturalWidth = 2;
+    naturalHeight = 2;
+    async decode() {}
+  }
+  const context = {document, window, URL: TestURL, Image: TestImage, localStorage: {
     getItem: (key) => { if (blocked) throw Error('Disabled'); return stored[key] ?? null; },
     setItem: (key, value) => { if (blocked) throw Error('Disabled'); stored[key] = value; },
     removeItem: (key) => { if (blocked) throw Error('Disabled'); delete stored[key]; }
@@ -249,8 +259,9 @@ assert.equal(inspect('example.com:8080/deneme').host, 'example.com:8080');
 assert.ok(inspect('javascript:alert(1)').error);
 assert.ok(inspect('https://xn--ornek-4ya.example.com').findings.some((item) => item.includes('xn--')));
 ids.get('inspector-qr').files = [{ type: 'image/png', size: 1024 }];
+practiceWindow.jsQR = () => ({ data: 'https://yerel.example.com' });
 await ids.get('inspector-qr').handlers.change();
-assert.ok(ids.get('inspector-qr-status').textContent.includes('tarayıcı QR görselini okuyamıyor'));
+assert.equal(ids.get('inspector-host').textContent, 'yerel.example.com');
 practiceWindow.BarcodeDetector = class { async detect() { return [{ rawValue: 'https://ornek.example.com' }]; } };
 await ids.get('inspector-qr').handlers.change();
 assert.equal(ids.get('inspector-host').textContent, 'ornek.example.com');
