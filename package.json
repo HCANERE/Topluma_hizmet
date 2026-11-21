@@ -1,0 +1,12 @@
+{
+  "name": "tiklamadan-once-dusun",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "test": "node checks.mjs && node tests/game-flow.mjs"
+  }
+}
