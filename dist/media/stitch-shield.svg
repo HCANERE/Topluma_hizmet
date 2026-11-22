@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 520" role="img" aria-labelledby="title desc">
+  <title id="title">Dijital güvenlik kalkanı</title>
+  <desc id="desc">Açık mavi zemin üzerinde cam görünümünde bir kalkan ve bağlantı çizgileri.</desc>
+  <defs>
+    <linearGradient id="background" x2="1" y2="1"><stop stop-color="#f4f7ff"/><stop offset=".55" stop-color="#dce9ff"/><stop offset="1" stop-color="#d2e0fb"/></linearGradient>
+    <linearGradient id="shield" x1=".1" x2=".9" y2="1"><stop stop-color="#fff" stop-opacity=".95"/><stop offset=".45" stop-color="#a8caff" stop-opacity=".66"/><stop offset="1" stop-color="#2875e7" stop-opacity=".52"/></linearGradient>
+    <linearGradient id="inner" x1="0" x2="1" y2="1"><stop stop-color="#f9feff" stop-opacity=".88"/><stop offset="1" stop-color="#60a5fa" stop-opacity=".15"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="35"/></filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="20" stdDeviation="21" flood-color="#2059b7" flood-opacity=".23"/></filter>
+  </defs>
+  <rect width="720" height="520" rx="24" fill="url(#background)"/>
+  <circle cx="580" cy="36" r="125" fill="#66b9ff" opacity=".24" filter="url(#glow)"/>
+  <circle cx="85" cy="420" r="115" fill="#2563eb" opacity=".18" filter="url(#glow)"/>
+  <g fill="none" stroke="#6db6fb" stroke-width="3" opacity=".47">
+    <path d="M38 345h124l48-48h89M26 392h172l53-53h31M476 178h81l41-41h96M459 255h125l41-41h74M456 324h85l56 56h101"/>
+    <path d="M42 124h125l38 38h97M536 79h59l34 34h75"/>
+  </g>
+  <g fill="#c8edff" stroke="#75bafb" stroke-width="3"><circle cx="38" cy="345" r="9"/><circle cx="26" cy="392" r="7"/><circle cx="694" cy="137" r="9"/><circle cx="699" cy="214" r="7"/><circle cx="698" cy="380" r="10"/><circle cx="42" cy="124" r="8"/></g>
+  <g fill="#fff" opacity=".78"><circle cx="121" cy="74" r="4"/><circle cx="626" cy="318" r="5"/><circle cx="553" cy="458" r="3"/><circle cx="246" cy="82" r="3"/><circle cx="180" cy="460" r="4"/></g>
+  <path d="M355 85c-54 38-105 52-156 55v143c0 102 68 169 156 198 88-29 156-96 156-198V140c-51-3-102-17-156-55Z" fill="url(#shield)" stroke="#fff" stroke-width="7" filter="url(#shadow)"/>
+  <path d="M355 123c-42 28-82 40-119 45v113c0 78 48 128 119 154 71-26 119-76 119-154V168c-37-5-77-17-119-45Z" fill="url(#inner)" stroke="#d9f2ff" stroke-width="4"/>
+  <path d="M355 123v312" stroke="#fff" stroke-width="3" opacity=".5"/>
+  <path d="m304 272 37 37 73-83" fill="none" stroke="#0759c5" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" opacity=".82"/>
+  <path d="m304 272 37 37 73-83" fill="none" stroke="#d9ffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="36" y="188" width="178" height="88" rx="16" fill="#fff" opacity=".71" stroke="#fff" stroke-width="2"/>
+  <circle cx="68" cy="232" r="14" fill="#dbeafe"/><path d="M68 223v11m0 7h.1" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round"/>
+  <rect x="94" y="218" width="88" height="7" rx="3.5" fill="#7da9e2" opacity=".72"/><rect x="94" y="235" width="65" height="6" rx="3" fill="#a7bde5"/>
+</svg>

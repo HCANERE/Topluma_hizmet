@@ -4,7 +4,7 @@ Selçuk Üniversitesi Topluma Hizmet Uygulamaları dersi için geliştirilen, T�
 
 ## Bölümler
 
-- **Ana sayfa:** Platformun bölümlerini ve öğrenme yolunu tanıtan giriş. Masaüstünde yan menü, telefonda açılır menü kullanılır.
+- **Ana sayfa:** Platformun dört ana bölümünü tanıtan giriş. Masaüstünde üst menü, telefonda açılır menü ve alt gezinme kullanılır.
 - **Senaryo oyunları:** Gençler, ebeveynler ve ileri yaştaki kullanıcılar için 18 kurgusal durumdan kategori başına rastgele seçilen beş soruluk turlar. Oyun puanı sadece o turu anlatır.
 - **Kısa tekrar:** Yanlış cevaplanan senaryoları bu cihazda yeniden sunar; doğru tekrarları 1, 3 ve 7 gün arayla önerir. Tekrar puanı ön/son teste katılmaz.
 - **Karar simülatörü:** Yedi olayda işareti fark etme, bağımsız doğrulama ve güvenli eylem seçimini üç adımda prova etme.
@@ -56,7 +56,8 @@ Kullanıcı önce adresi cihazında inceler. Canlı sorgu için ayrıca onay ver
 
 | Dosya | Görev |
 | --- | --- |
-| `dist/index.html`, `dist/style.css`, `dist/portal.css`, `dist/portal.js` | Sayfalar, platform görünümü, menü ve video filtresi |
+| `dist/index.html`, `dist/style.css`, `dist/portal.css`, `dist/stitch-theme.css`, `dist/portal.js` | Sayfalar, platform görünümü, Stitch tasarım uyarlaması, menü ve video filtresi |
+| `design/stitch-2026-11-22/` | Stitch ekran görüntüleri ve tasarım sistemi kaynakları |
 | `dist/data.js`, `dist/app.js` | Kategori oyununun içerik ve akışı |
 | `dist/extra-scenarios.js`, `content/extra-scenarios.json`, `tools/` | Ekipçe hazırlanıp doğrulanan ek senaryolar ve yerel senaryo atölyesi |
 | `dist/decision-data.js`, `dist/decision.js` | Karar simülatörü |

@@ -5,6 +5,7 @@
   const scrim = document.getElementById('sidebar-scrim');
   const navLinks = [...document.querySelectorAll('[data-site-nav]')];
   const navGroups = [...document.querySelectorAll('[data-nav-group]')];
+  const bottomLinks = [...document.querySelectorAll('[data-bottom-group]')];
   const mobileNavigation = window.matchMedia('(max-width:900px)');
   const currentSectionLabel = document.getElementById('current-section-label');
   const videos = [...document.querySelectorAll('#videos-screen video')];
@@ -59,11 +60,18 @@
   function updateNavigation() {
     const hash = location.hash.slice(1);
     const section = routeGroups[hash] || (hash.startsWith('taktik-') ? 'guide' : 'home');
+    document.body.dataset.section = section;
+    document.getElementById('practice-screen')?.setAttribute('aria-labelledby', section === 'inspector' ? 'inspector-title' : 'practice-title');
     navLinks.forEach((link) => {
       if (link.dataset.siteNav === section) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
     const activeGroup = navigationGroups[section] || 'learn';
+    const bottomGroup = section === 'home' ? 'home' : activeGroup;
+    bottomLinks.forEach((link) => {
+      if (link.dataset.bottomGroup === bottomGroup) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
     navGroups.forEach((group) => {
       const active = group.dataset.navGroup === activeGroup;
       group.classList.toggle('nav-group-active', active);

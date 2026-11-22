@@ -47,8 +47,8 @@ assert.equal(parser.registeredDomain('a.b.ck', special), 'a.b.ck');
 assert.equal(parser.registeredDomain('a.www.ck', special), 'www.ck');
 
 const html = fs.readFileSync(new URL('index.html', root), 'utf8');
-const sources = [...html.matchAll(/<source src="(media\/[^"]+\.mp4)"/g)].map((match) => match[1]);
-const captions = [...html.matchAll(/<track kind="captions" src="(media\/[^"]+\.vtt)"/g)].map((match) => match[1]);
+const sources = [...html.matchAll(/<source src="(media\/[^"?]+\.mp4)(?:\?[^"]*)?"/g)].map((match) => match[1]);
+const captions = [...html.matchAll(/<track kind="captions" src="(media\/[^"?]+\.vtt)(?:\?[^"]*)?"/g)].map((match) => match[1]);
 assert.equal(sources.length, 7);
 assert.equal(captions.length, 7);
 for (const file of [...sources, ...captions]) assert.ok(fs.existsSync(new URL(file, root)), file);

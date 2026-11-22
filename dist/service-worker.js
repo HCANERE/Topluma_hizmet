@@ -1,11 +1,11 @@
-const CACHE = 'tod-training-v16';
+const CACHE = 'tod-training-v18';
 const CORE = [
-  './', 'index.html', 'style.css', 'practice.css', 'portal.css', 'favicon.svg', 'manifest.webmanifest',
+  './', 'index.html', 'style.css', 'practice.css', 'portal.css', 'stitch-theme.css', 'favicon.svg', 'manifest.webmanifest',
   'data.js', 'extra-scenarios.js', 'app.js', 'lab-scenarios.js', 'practice.js', 'url-inspector.js',
   'decision-data.js', 'decision.js', 'assessment.js', 'report-merge.js', 'message-analyzer.js', 'image-ocr.js', 'learning-path.js', 'guest-progress.js',
   'chatbot-data.js', 'chatbot.js', 'media-lab.js', 'portal.js',
   'vendor/jsQR.js', 'vendor/public_suffix_list.dat',
-  'media/poster-wide.svg', 'media/poster-portrait.svg'
+  'media/poster-wide.svg', 'media/poster-portrait.svg', 'media/stitch-shield.svg'
 ];
 
 self.addEventListener('install', (event) => {
