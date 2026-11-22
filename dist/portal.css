@@ -423,6 +423,49 @@ button:focus-visible,a:focus-visible,input:focus-visible,[tabindex="-1"]:focus-v
 .decision-message,.decision-panel,.decision-summary,.assessment-card,.video-card,.chat-panel,.chat-side { border-radius:8px; box-shadow:none; }
 .module-wrap { padding-block:53px 86px; }
 
+/* Dijital oyun seçimi: resmî PEGI simgelerini taklit etmeyen açıklayıcı rehber. */
+.gameguide { color:#102f40; }
+.gameguide h2 { margin:0; font-size:clamp(1.55rem,2.4vw,2.1rem); line-height:1.2; }
+.gameguide h3 { margin:0 0 9px; font-size:1.12rem; line-height:1.3; }
+.gameguide p,.gameguide li { line-height:1.65; }
+.gameguide a { color:#075c65; font-weight:750; text-underline-offset:3px; }
+.gameguide a:focus-visible { outline:3px solid #087887; outline-offset:4px; }
+.gameguide-kicker { margin:0 0 10px; color:#086a73; font-size:.82rem; font-weight:850; letter-spacing:.09em; }
+.gameguide-intro { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(275px,.75fr); gap:38px; align-items:start; margin-top:32px; padding:31px; background:#e7f2f3; border-left:4px solid #086a73; border-radius:8px; }
+.gameguide-intro p { color:#365561; font-size:1.04rem; }
+.gameguide-intro-action { padding:20px; background:#fff; border:1px solid #bfd5da; border-radius:7px; }
+.gameguide-intro-action strong { font-size:1.08rem; }
+.gameguide-intro-action p { margin:8px 0 13px; font-size:.96rem; }
+.gameguide-section { margin-top:60px; }
+.gameguide-section-head { display:flex; justify-content:space-between; align-items:end; gap:30px; margin-bottom:22px; }
+.gameguide-section-head>div { max-width:530px; }
+.gameguide-section-head>p { max-width:390px; margin:0; color:#526a76; font-size:.94rem; }
+.pegi-age-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:13px; }
+.pegi-age-grid article,.pegi-descriptor-grid article { background:#fff; border:1px solid #d0e0e4; border-radius:8px; }
+.pegi-age-grid article { padding:21px 17px 18px; }
+.pegi-age-grid h3 { margin-top:16px; }
+.pegi-age-grid p,.pegi-descriptor-grid p { margin:0; color:#4c6571; font-size:.94rem; }
+.pegi-age { display:inline-grid; place-items:center; min-width:62px; height:58px; padding-inline:8px; border:2px solid currentColor; border-radius:10px; font-size:1.45rem; font-weight:850; letter-spacing:-.04em; }
+.pegi-age-3 { color:#336b3f; background:#eaf5eb; }
+.pegi-age-7 { color:#54712c; background:#f0f6e6; }
+.pegi-age-12 { color:#8b650c; background:#fff5d9; }
+.pegi-age-16 { color:#98501d; background:#fff0e5; }
+.pegi-age-18 { color:#933c47; background:#fff0f1; }
+.pegi-descriptor-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px; }
+.pegi-descriptor-grid article { display:flex; align-items:start; gap:16px; padding:20px; }
+.pegi-descriptor-icon { display:grid; place-items:center; flex:none; width:46px; height:46px; border-radius:7px; background:#e5f2f2; color:#075863; font-size:1rem; font-weight:850; }
+.pegi-descriptor-icon svg { width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.pegi-descriptor-icon svg circle { fill:currentColor; stroke:none; }
+.gameguide-check { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(265px,.65fr); gap:35px; padding:28px 31px; background:#fff; border:1px solid #d0e0e4; border-radius:8px; }
+.gameguide-check ol { margin:19px 0 0; padding-left:23px; }
+.gameguide-check li+li { margin-top:11px; }
+.gameguide-check aside { padding:21px; background:#f2f7f8; border-radius:7px; }
+.gameguide-check aside p { color:#4c6571; }
+.gameguide-source { margin:28px 0 0; color:#536b76; font-size:.9rem; }
+@media(max-width:1050px) { .pegi-age-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:780px) { .gameguide-intro,.gameguide-check { grid-template-columns:1fr; } .gameguide-section-head { display:block; } .gameguide-section-head>p { max-width:none; margin-top:12px; } }
+@media(max-width:600px) { .gameguide-intro,.gameguide-check { padding:22px 19px; } .gameguide-section { margin-top:45px; } .pegi-age-grid,.pegi-descriptor-grid { grid-template-columns:1fr; } .pegi-age-grid article { display:grid; grid-template-columns:62px 1fr; column-gap:15px; align-items:start; } .pegi-age-grid h3 { margin:0 0 5px; } .pegi-age-grid p { grid-column:2; } .pegi-descriptor-grid article { padding:18px; } }
+
 @media(max-width:1120px) {
   #site-shell { padding-left:224px; }
   .site-sidebar { width:224px; }

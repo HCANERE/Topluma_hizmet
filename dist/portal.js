@@ -32,17 +32,17 @@
     kategoriler: 'games', 'tekrar-turu': 'review', pratik: 'practice', laboratuvar: 'practice',
     'karar-simulatoru': 'decision', 'baglanti-incele': 'inspector',
     'mesaj-incele': 'message', 'rehber-asistani': 'chat', 'ogrenme-yolu': 'path',
-    'egitim-videolari': 'videos', 'medya-laboratuvari': 'media', olcme: 'assessment', 'saha-raporu': 'reports',
+    'egitim-videolari': 'videos', 'dijital-oyun-secimi': 'gameguide', 'medya-laboratuvari': 'media', olcme: 'assessment', 'saha-raporu': 'reports',
     'taktik-rehberi': 'guide', 'zarar-kontrolu': 'recovery'
   };
   const navigationGroups = {
-    path: 'learn', videos: 'learn', guide: 'learn',
+    path: 'learn', videos: 'learn', gameguide: 'learn', guide: 'learn',
     games: 'practice', decision: 'practice', practice: 'practice', media: 'practice', review: 'practice',
     message: 'analyze', inspector: 'analyze', chat: 'analyze', recovery: 'analyze',
     assessment: 'measure', reports: 'measure'
   };
   const sectionLabels = {
-    home: 'Ana sayfa', path: 'Öğrenme yolu', videos: 'Eğitim videoları', guide: 'Taktik rehberi',
+    home: 'Ana sayfa', path: 'Öğrenme yolu', videos: 'Eğitim videoları', gameguide: 'Dijital oyun seçimi', guide: 'Taktik rehberi',
     games: 'Soru oyunları', decision: 'Karar simülatörü', practice: 'Tuzak laboratuvarı',
     media: 'Medya doğrulama', review: 'Kısa tekrar', message: 'Mesaj inceleme',
     inspector: 'Bağlantı ve QR', chat: 'Dijital güvenlik rehberi', recovery: 'Şimdi ne yapacağım?',

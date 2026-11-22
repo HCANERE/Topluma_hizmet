@@ -12,12 +12,13 @@
     media: document.querySelector('#media-screen'),
     path: document.querySelector('#path-screen'),
     decision: document.querySelector('#decision-screen'),
+    gameguide: document.querySelector('#gameguide-screen'),
     videos: document.querySelector('#videos-screen'),
     assessment: document.querySelector('#assessment-screen'),
     game: document.querySelector('#game-screen'),
     result: document.querySelector('#result-screen')
   };
-  const screenHeadings = { home: '#home-title', practice: '#practice-title', message: '#message-title', chat: '#chat-title', review: '#review-screen-title', reports: '#reports-title', media: '#media-title', path: '#path-title', decision: '#decision-title', videos: '#videos-title', assessment: '#assessment-title', game: '#question-title', result: '#result-title' };
+  const screenHeadings = { home: '#home-title', practice: '#practice-title', message: '#message-title', chat: '#chat-title', review: '#review-screen-title', reports: '#reports-title', media: '#media-title', path: '#path-title', decision: '#decision-title', gameguide: '#gameguide-title', videos: '#videos-title', assessment: '#assessment-title', game: '#question-title', result: '#result-title' };
   const siteShell = document.querySelector('#site-shell');
   const skipLink = document.querySelector('#skip-link');
   const practiceViews = new Map(Array.from(document.querySelectorAll('[data-practice-view]'), (view) => [view.id, view]));
@@ -119,7 +120,7 @@
     document.body.classList.toggle('playing', playing);
     if (!playing) document.body.classList.remove('senior-mode');
     skipLink.setAttribute('href', {
-      practice: '#practice-screen', message: '#message-screen', chat: '#chat-screen', review: '#review-screen', reports: '#reports-screen', media: '#media-screen', path: '#path-screen', decision: '#decision-screen', videos: '#videos-screen', assessment: '#assessment-screen'
+      practice: '#practice-screen', message: '#message-screen', chat: '#chat-screen', review: '#review-screen', reports: '#reports-screen', media: '#media-screen', path: '#path-screen', decision: '#decision-screen', gameguide: '#gameguide-screen', videos: '#videos-screen', assessment: '#assessment-screen'
     }[name] || '#main');
     window.scrollTo(0, 0);
     focusTarget.focus({ preventScroll: true });
@@ -127,7 +128,7 @@
 
   function syncLocation() {
     const id = window.location.hash.slice(1);
-    const moduleRoutes = { 'mesaj-incele': 'message', 'rehber-asistani': 'chat', 'tekrar-turu': 'review', 'saha-raporu': 'reports', 'medya-laboratuvari': 'media', 'ogrenme-yolu': 'path', 'karar-simulatoru': 'decision', 'egitim-videolari': 'videos', olcme: 'assessment' };
+    const moduleRoutes = { 'mesaj-incele': 'message', 'rehber-asistani': 'chat', 'tekrar-turu': 'review', 'saha-raporu': 'reports', 'medya-laboratuvari': 'media', 'ogrenme-yolu': 'path', 'karar-simulatoru': 'decision', 'dijital-oyun-secimi': 'gameguide', 'egitim-videolari': 'videos', olcme: 'assessment' };
     if (moduleRoutes[id]) {
       showScreen(moduleRoutes[id]);
       return;
