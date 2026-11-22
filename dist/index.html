@@ -10,7 +10,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="practice.css">
-  <link rel="stylesheet" href="portal.css">
+  <link rel="stylesheet" href="portal.css?v=15">
   <script src="data.js" defer></script>
   <script src="extra-scenarios.js" defer></script>
   <script src="app.js" defer></script>
@@ -28,12 +28,12 @@
   <script src="chatbot-data.js" defer></script>
   <script src="chatbot.js" defer></script>
   <script src="media-lab.js" defer></script>
-  <script src="portal.js" defer></script>
+  <script src="portal.js?v=16" defer></script>
 </head>
 <body>
   <a id="skip-link" class="skip-link" href="#main">İçeriğe geç</a>
   <div id="site-shell">
-    <aside class="site-sidebar" id="site-sidebar" aria-label="Site bölümleri">
+    <div class="site-sidebar" id="site-sidebar">
       <a class="sidebar-brand" href="#ana-sayfa"><span class="brand-mark" aria-hidden="true">T</span><span>Tıklamadan<br>Önce Düşün</span></a>
       <p class="sidebar-project">Dijital güvenlik eğitim platformu</p>
       <nav class="sidebar-nav" aria-label="Ana gezinme">
@@ -63,7 +63,7 @@
         </div></details>
       </nav>
       <div class="sidebar-foot"><strong>Dur. Düşün. Doğrula.</strong><span>Ücretsiz · Üyeliksiz · Türkçe</span><small id="offline-status" role="status"></small></div>
-    </aside>
+    </div>
     <button class="sidebar-scrim" id="sidebar-scrim" type="button" aria-label="Menüyü kapat" hidden></button>
     <header class="site-header wrap"><button class="menu-button" id="menu-button" type="button" aria-controls="site-sidebar" aria-expanded="false" aria-label="Menüyü aç">☰</button><a class="brand" href="#ana-sayfa" aria-label="Tıklamadan Önce Düşün ana sayfa"><span class="brand-mark" aria-hidden="true">T</span><span>Tıklamadan<br>Önce Düşün</span></a><div class="header-context"><span>EĞİTİM PLATFORMU</span><strong id="current-section-label">Ana sayfa</strong></div><nav class="header-nav" aria-label="Hızlı erişim"><a class="header-link" href="#ogrenme-yolu">Öğrenme yolu</a><a class="header-link header-action" href="#baglanti-incele">Şüpheli içeriği incele</a><button class="text-size-button" id="text-size" type="button" aria-pressed="false" aria-label="Büyük metni aç">Aa<span>Büyük metin</span></button></nav></header>
     <div id="home-screen">

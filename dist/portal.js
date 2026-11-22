@@ -5,6 +5,7 @@
   const scrim = document.getElementById('sidebar-scrim');
   const navLinks = [...document.querySelectorAll('[data-site-nav]')];
   const navGroups = [...document.querySelectorAll('[data-nav-group]')];
+  const mobileNavigation = window.matchMedia('(max-width:900px)');
   const currentSectionLabel = document.getElementById('current-section-label');
   const videos = [...document.querySelectorAll('#videos-screen video')];
   function setMenu(open) {
@@ -12,6 +13,7 @@
     menu.setAttribute('aria-expanded', String(open));
     menu.setAttribute('aria-label', open ? 'Menüyü kapat' : 'Menüyü aç');
     scrim.hidden = !open;
+    if (open) navGroups.find((group) => group.classList.contains('nav-group-active'))?.setAttribute('open', '');
   }
   menu.addEventListener('click', () => {
     const open = menu.getAttribute('aria-expanded') !== 'true';
@@ -19,12 +21,18 @@
     if (open) sidebar.querySelector('a').focus();
   });
   scrim.addEventListener('click', () => { setMenu(false); menu.focus(); });
-  window.matchMedia('(max-width:900px)').addEventListener('change', () => setMenu(false));
+  mobileNavigation.addEventListener('change', () => { setMenu(false); updateNavigation(); });
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
-      setMenu(false);
-      menu.focus();
-    }
+    if (event.key !== 'Escape') return;
+    if (menu.getAttribute('aria-expanded') === 'true') { setMenu(false); menu.focus(); return; }
+    const openGroup = navGroups.find((group) => group.open);
+    if (openGroup && !mobileNavigation.matches) { openGroup.open = false; openGroup.querySelector('summary').focus(); }
+  });
+  navGroups.forEach((group) => group.addEventListener('toggle', () => {
+    if (group.open && !mobileNavigation.matches) navGroups.forEach((other) => { if (other !== group) other.open = false; });
+  }));
+  document.addEventListener('click', (event) => {
+    if (!mobileNavigation.matches && !sidebar.contains(event.target)) navGroups.forEach((group) => { group.open = false; });
   });
 
   const routeGroups = {
@@ -56,13 +64,20 @@
       else link.removeAttribute('aria-current');
     });
     const activeGroup = navigationGroups[section] || 'learn';
-    navGroups.forEach((group) => { group.open = group.dataset.navGroup === activeGroup; });
+    navGroups.forEach((group) => {
+      const active = group.dataset.navGroup === activeGroup;
+      group.classList.toggle('nav-group-active', active);
+      group.open = mobileNavigation.matches && active;
+    });
     currentSectionLabel.textContent = sectionLabels[section];
     if (section !== 'videos') videos.forEach((video) => video.pause());
     if (section !== 'chat') window.TOD_CHAT_GUIDE?.clearConversation();
     setMenu(false);
   }
-  navLinks.forEach((link) => link.addEventListener('click', () => setMenu(false)));
+  navLinks.forEach((link) => link.addEventListener('click', () => {
+    setMenu(false);
+    if (!mobileNavigation.matches) navGroups.forEach((group) => { group.open = false; });
+  }));
   window.addEventListener('hashchange', updateNavigation);
   updateNavigation();
 
